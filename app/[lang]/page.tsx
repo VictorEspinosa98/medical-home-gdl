@@ -66,19 +66,14 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
              * una franja, así que un desenfoque suave la convierte en textura
              * (y es el look del banner anterior). scale-105 tapa el borde
              * translúcido que deja blur() en los cantos. */
-            imgClassName="scale-105 object-[50%_16%] blur-[3px]"
+            imgClassName="scale-105 object-[50%_0%] blur-[3px]"
           />
           <div className="hero-veil absolute inset-0" aria-hidden />
 
           <div className="container-site relative z-10 py-20 text-center md:py-28">
-            <p className="hero-in chip" style={{ animationDelay: '0ms' }}>
-              <span className="pulse-dot" aria-hidden />
-              {HERO.badge[lang]}
-            </p>
-
             <h1
-              className="hero-in mx-auto mt-6 max-w-4xl text-display text-white"
-              style={{ animationDelay: '60ms' }}
+              className="hero-in mx-auto max-w-4xl text-display text-white"
+              style={{ animationDelay: '0ms' }}
             >
               {p.h1}
             </h1>

@@ -7,7 +7,6 @@ export type Pillar = { icon: 'clock' | 'shield' | 'home' | 'globe'; title: strin
 export type Bullet = { icon: 'clock' | 'shield' | 'pin' | 'heart' | 'check'; text: string }
 
 export const HERO = {
-  badge: { es: 'Disponible 24 horas', en: 'Available 24 hours' },
   /** Bloque extraíble para LLMs: dato duro, autocontenido, primera pantalla. */
   answerTitle: {
     es: 'Atención médica profesional, donde la necesites.',
@@ -96,35 +95,35 @@ export const STEPS: Record<Locale, Step[]> = {
   es: [
     {
       n: '01',
-      title: 'Escríbenos por WhatsApp',
-      body: 'Nos cuentas qué está pasando y en qué dirección estás. No necesitas cita previa ni llenar formularios.',
+      title: 'Llámanos o escríbenos por WhatsApp',
+      body: 'Cuéntanos qué servicio necesitas y dónde te encuentras.',
     },
     {
       n: '02',
-      title: 'Te confirmamos costo y hora',
-      body: 'Antes de mandar al médico te decimos el precio exacto y en cuánto tiempo llega. Sin sorpresas.',
+      title: 'Confirmamos tu atención',
+      body: 'Te compartimos disponibilidad, costo y tiempo estimado.',
     },
     {
       n: '03',
-      title: 'El médico llega a tu puerta',
-      body: 'Te revisa, te explica qué tienes, te da tu receta y deja las indicaciones por escrito.',
+      title: 'Vamos hasta ti',
+      body: 'Coordinamos tu servicio y te atendemos donde lo necesites.',
     },
   ],
   en: [
     {
       n: '01',
-      title: 'Message us on WhatsApp',
-      body: 'Tell us what is happening and where you are. No appointment, no forms to fill in.',
+      title: 'Call us or message us on WhatsApp',
+      body: 'Tell us which service you need and where you are.',
     },
     {
       n: '02',
-      title: 'We confirm price and time',
-      body: 'Before sending the doctor we tell you the exact price and the arrival time. No surprises.',
+      title: 'We confirm your visit',
+      body: 'We share availability, price and estimated arrival time.',
     },
     {
       n: '03',
-      title: 'The doctor arrives at your door',
-      body: 'They examine you, explain what is going on, write your prescription and leave written instructions.',
+      title: 'We come to you',
+      body: 'We arrange your service and attend you wherever you need it.',
     },
   ],
 }
