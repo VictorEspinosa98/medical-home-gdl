@@ -271,6 +271,11 @@
   .btn-primary:focus-visible {
     background: var(--color-brand-strong);
     box-shadow: 0 14px 30px -12px color-mix(in oklab, var(--color-brand) 80%, transparent);
+    transform: translateY(-1px);
+  }
+  /* Va después del hover a propósito: si no, `.btn:active` pierde por orden. */
+  .btn-primary:active {
+    transform: translateY(1px);
   }
 
   .btn-secondary {
@@ -379,4 +384,111 @@
   transition:
     opacity 500ms cubic-bezier(0.2, 0.7, 0.3, 1),
     transform 500ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* ── Pulso de disponibilidad ────────────────────────────────────────────────
+ * El punto del badge 24/7 late y emite una onda tipo radar. Solo `transform`
+ * y `opacity`, así que corre en el compositor: cero reflow, cero repaint.
+ * `::before` es el punto y `::after` la onda — separados a propósito, porque
+ * si la onda fuera hija del punto heredaría su escala y el radar se deformaría.
+ */
+@keyframes mh-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.62);
+  }
+}
+
+@keyframes mh-radar {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .pulse-dot {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .pulse-dot::before,
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+  }
+  .pulse-dot::before {
+    background: var(--color-brand);
+    animation: mh-beat 2.6s ease-in-out infinite;
+  }
+  .pulse-dot::after {
+    border: 1.5px solid color-mix(in oklab, var(--color-glow) 85%, transparent);
+    /* `linear`, no `ease-out`: con easing la onda se apaga antes de expandirse
+     * y el radar deja de leerse. */
+    animation: mh-radar 2.6s linear infinite;
+  }
+}
+
+/* ── Blob que respira ───────────────────────────────────────────────────────
+ * Solo escala: la opacidad la fija la utilidad `opacity-*` de cada blob y una
+ * animación la pisaría.
+ */
+@keyframes mh-drift {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+  }
+}
+
+@layer components {
+  .blob-breathe {
+    animation: mh-drift 18s ease-in-out infinite;
+  }
+}
+
+/* ── Halo del botón flotante de WhatsApp ────────────────────────────────────
+ * El `z-index: -1` lo manda detrás del botón sin salirse de su capa: el
+ * elemento es `fixed` con `z-40`, así que crea su propio contexto de apilado.
+ */
+@keyframes mh-halo {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .wa-float::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: #25d366;
+    animation: mh-halo 3s ease-out infinite;
+  }
+
+  /* Entrada del menú móvil y de cualquier panel que aparezca de golpe. */
+  .pop-in {
+    animation: mh-rise 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
 }

@@ -82,7 +82,7 @@ export function Header({ lang, currentRef }: { lang: Locale; currentRef: RouteRe
           </summary>
 
           <nav
-            className="card absolute right-0 top-[calc(100%+12px)] w-[min(88vw,320px)] p-2.5"
+            className="card pop-in absolute right-0 top-[calc(100%+12px)] w-[min(88vw,320px)] p-2.5"
             aria-label={t.footerNav}
           >
             {links.map((p) => (

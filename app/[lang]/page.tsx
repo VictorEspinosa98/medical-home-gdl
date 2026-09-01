@@ -52,11 +52,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
         {/* ── Hero ─────────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden bg-haze pb-16 pt-12 md:pb-24 md:pt-16">
           <div
-            className="blob left-[-14%] top-[-18%] h-[560px] w-[560px] opacity-70"
+            className="blob blob-breathe left-[-14%] top-[-18%] h-[560px] w-[560px] opacity-70"
             aria-hidden
           />
           <div
-            className="blob bottom-[-30%] right-[-10%] h-[460px] w-[460px] opacity-50"
+            className="blob blob-breathe bottom-[-30%] right-[-10%] h-[460px] w-[460px] opacity-50"
             aria-hidden
           />
 
@@ -67,10 +67,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                   className="hero-in chip"
                   style={{ animationDelay: '0ms' }}
                 >
-                  <span
-                    className="h-2 w-2 rounded-full bg-brand"
-                    aria-hidden
-                  />
+                  <span className="pulse-dot" aria-hidden />
                   {HERO.badge[lang]}
                 </p>
 
@@ -124,12 +121,12 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                     className="shadow-[0_40px_80px_-40px_rgba(29,67,85,0.45)]"
                   />
                   {/* .glass #1 de los 3 permitidos (design.md §5) */}
-                  <div className="glass absolute bottom-4 left-4 rounded-2xl px-5 py-3.5 md:bottom-6 md:left-6">
+                  <div
+                    className="hero-in glass absolute bottom-4 left-4 rounded-2xl px-5 py-3.5 md:bottom-6 md:left-6"
+                    style={{ animationDelay: '320ms' }}
+                  >
                     <p className="flex items-center gap-2.5 text-[0.9375rem] font-semibold text-deep">
-                      <span className="relative flex h-2.5 w-2.5" aria-hidden>
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-brand opacity-60" />
-                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand" />
-                      </span>
+                      <span className="pulse-dot h-2.5 w-2.5" aria-hidden />
                       {t.available247}
                     </p>
                   </div>

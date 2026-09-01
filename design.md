@@ -200,13 +200,27 @@ Altura mínima 48px, área táctil mínima 44×44px, `border-radius: 999px`.
 
 ## 7. Movimiento
 
-Presupuesto corto y deliberado. **Tres animaciones en todo el sitio:**
+Presupuesto corto y deliberado. **Todo es CSS: cero librerías de animación, cero JS salvo el `IntersectionObserver` del punto 2.**
 
-1. **Entrada del hero** — título, subtítulo y CTA escalonados a 60ms. `@keyframes` puro, sin JS.
+Al entrar:
+
+1. **Entrada del hero** — título, subtítulo, CTA y badge escalonados a 60ms. `@keyframes` puro, sin JS.
 2. **Fade-up de sección** — `IntersectionObserver`, `translateY(16px)` a 0 más opacidad, 500ms, una sola vez.
-3. **Hover** — botones y tarjetas, 180ms `cubic-bezier(.2,.7,.3,1)`.
+3. **Menú móvil** — `.pop-in`, 220ms, al desplegar el `<details>`.
+
+En reposo (las únicas tres animaciones en bucle del sitio):
+
+4. **Pulso de disponibilidad** (`.pulse-dot`) — el punto del badge 24/7 late y emite una onda tipo radar, 2.6s. Es el único elemento que se mueve solo dentro del contenido: refuerza el mensaje de "hay alguien ahora mismo".
+5. **Blob que respira** (`.blob-breathe`) — escala 1 → 1.14 en 18s. Solo en los blobs del hero y de la banda final, no en los 15 del sitio.
+6. **Halo del botón flotante** (`.wa-float`) — una onda verde cada 3s. Es el CTA principal en móvil.
+
+Al interactuar:
+
+7. **Hover** — botones (con lift de 1px), tarjetas y zoom de foto al 1.04 en las tarjetas de servicio, 180-500ms `cubic-bezier(.2,.7,.3,1)`.
 
 Nada más. Sin parallax, sin contadores animados, sin carruseles automáticos.
+
+Las tres animaciones en bucle usan **solo `transform` y `opacity`**, así que corren en el compositor: no provocan layout ni repaint. La regla de `prefers-reduced-motion` de abajo las detiene todas — `animation-iteration-count: 1` mata el bucle, no solo lo acelera.
 
 ```css
 @media (prefers-reduced-motion: reduce) {

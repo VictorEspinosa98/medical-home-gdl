@@ -1,6 +1,6 @@
 import { CtaBand, FloatingWhatsApp } from '@/components/Cta'
 import { Header } from '@/components/Header'
-import { ClockIcon, ShieldIcon } from '@/components/Icons'
+import { ClockIcon } from '@/components/Icons'
 import { Img } from '@/components/Img'
 import { JsonLd } from '@/components/JsonLd'
 import { Reveal } from '@/components/Reveal'
@@ -59,7 +59,7 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
                     {t.responseTime}
                   </li>
                   <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
-                    <ShieldIcon className="h-[1.15em] w-[1.15em] text-brand" />
+                    <span className="pulse-dot ml-0.5 mr-0.5" aria-hidden />
                     {t.available247}
                   </li>
                 </ul>

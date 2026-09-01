@@ -54,7 +54,7 @@ export function FloatingWhatsApp({ lang, message }: { lang: Locale; message: str
       target="_blank"
       rel="noopener noreferrer"
       aria-label={UI[lang].ctaWhatsapp}
-      className="fixed right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] transition-transform hover:scale-105 focus-visible:scale-105 md:right-6"
+      className="wa-float fixed right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] transition-transform hover:scale-105 focus-visible:scale-105 md:right-6"
       style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
     >
       <WhatsAppIcon className="h-7 w-7" />
@@ -76,7 +76,10 @@ export function CtaBand({
 }) {
   return (
     <section className="section relative overflow-hidden bg-ink text-white">
-      <div className="blob -top-24 right-[-10%] h-[420px] w-[420px] opacity-60" aria-hidden />
+      <div
+        className="blob blob-breathe -top-24 right-[-10%] h-[420px] w-[420px] opacity-60"
+        aria-hidden
+      />
       <div
         className="blob bottom-[-40%] left-[-8%] h-[380px] w-[380px] opacity-40"
         aria-hidden

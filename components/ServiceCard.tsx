@@ -28,6 +28,7 @@ export function ServiceCard({
         sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
         priority={priority}
         className="rounded-none"
+        imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.04]"
       />
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-h3">{t.shortName}</h3>
