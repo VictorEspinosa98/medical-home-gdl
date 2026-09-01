@@ -1,0 +1,29 @@
+# Detección de idioma en el edge de Netlify.
+#
+# output:'export' desactiva middleware, así que la negociación por
+# Accept-Language se hace aquí, en el CDN: sin JavaScript y sin flash.
+#
+# Netlify evalúa primero la cookie `nf_lang` (que escribe el selector de
+# idioma) y, si no existe, el PRIMER tag de Accept-Language — ignora los
+# pesos q=. `Language=en` matchea en-US, en-GB, etc. por prefijo.
+#
+# Sin flag `!`: no existe out/index.html, así que no hay archivo que hacer
+# shadow. Forzarlo solo añadiría riesgo de pisar archivos reales.
+#
+# El orden importa: gana la primera regla que matchea.
+
+/                    /es/                     302  Language=es
+/                    /en/                     302  Language=en
+
+# Catch-all OBLIGATORIO: sin esto, un crawler sin Accept-Language
+# (o con fr/de/pt) recibe un 404 en la raíz del sitio.
+/                    /es/                     302
+
+# Rutas sin locale — defensivo, por si alguien enlaza sin prefijo de idioma.
+/servicios/*         /es/servicios/:splat     301
+/services/*          /en/services/:splat      301
+/nosotros/*          /es/nosotros/            301
+/about/*             /en/about/               301
+/cobertura/*         /es/cobertura/           301
+/coverage/*          /en/coverage/            301
+/faq/*               /en/faq/                 301

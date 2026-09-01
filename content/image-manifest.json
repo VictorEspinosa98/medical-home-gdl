@@ -1,0 +1,92 @@
+{
+  "/img/brand/icon-512": {
+    "base": "/img/brand/icon-512.0acdeee3",
+    "width": 512,
+    "height": 512
+  },
+  "/img/brand/isotipo": {
+    "base": "/img/brand/isotipo.1ce12283",
+    "width": 328,
+    "height": 316
+  },
+  "/img/brand/logo-full": {
+    "base": "/img/brand/logo-full.28eef23a",
+    "width": 578,
+    "height": 440
+  },
+  "/img/brand/logo": {
+    "base": "/img/brand/logo.9c0470c8",
+    "width": 578,
+    "height": 124
+  },
+  "/img/hero": {
+    "base": "/img/hero.c8cf0e08",
+    "width": 2000,
+    "height": 1333
+  },
+  "/img/services/certificados": {
+    "base": "/img/services/certificados.1fc4c81d",
+    "width": 1707,
+    "height": 2560
+  },
+  "/img/services/consulta-domicilio": {
+    "base": "/img/services/consulta-domicilio.c464387e",
+    "width": 1280,
+    "height": 843
+  },
+  "/img/services/curaciones": {
+    "base": "/img/services/curaciones.8c6b03e9",
+    "width": 1125,
+    "height": 2000
+  },
+  "/img/services/evaluacion-completa": {
+    "base": "/img/services/evaluacion-completa.c8cf0e08",
+    "width": 2000,
+    "height": 1333
+  },
+  "/img/services/laboratorio": {
+    "base": "/img/services/laboratorio.23ced6f0",
+    "width": 2000,
+    "height": 1330
+  },
+  "/img/services/medicamentos": {
+    "base": "/img/services/medicamentos.74534fc4",
+    "width": 1335,
+    "height": 2000
+  },
+  "/img/services/prenupcial": {
+    "base": "/img/services/prenupcial.96f22ddd",
+    "width": 2000,
+    "height": 1333
+  },
+  "/img/services/pruebas-rapidas": {
+    "base": "/img/services/pruebas-rapidas.6ef7b30b",
+    "width": 1024,
+    "height": 686
+  },
+  "/img/services/sondas": {
+    "base": "/img/services/sondas.14104ca8",
+    "width": 800,
+    "height": 533
+  },
+  "/img/services/sueros": {
+    "base": "/img/services/sueros.2c36ca15",
+    "width": 2200,
+    "height": 1467
+  },
+  "/img/services/suturas": {
+    "base": "/img/services/suturas.44e43adf",
+    "width": 1920,
+    "height": 1200
+  },
+  "/img/og/default": {
+    "base": "/img/og/default",
+    "width": 1200,
+    "height": 630
+  },
+  "/img/og/en": {
+    "base": "/img/og/en",
+    "width": 1200,
+    "height": 630
+  }
+}

@@ -1,11 +1,14 @@
 {
-  "name": "medical-home-tmp",
-  "version": "0.1.0",
+  "name": "medical-home-gdl",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node scripts/build-images.mjs && next build && tsx scripts/build-llms.ts",
+    "build:images": "node scripts/build-images.mjs",
+    "build:llms": "tsx scripts/build-llms.ts",
+    "serve": "pnpm dlx serve out -l 3000",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint"
   },
   "dependencies": {
@@ -20,8 +23,13 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.29.3"
+  "packageManager": "pnpm@10.29.3",
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild"]
+  }
 }

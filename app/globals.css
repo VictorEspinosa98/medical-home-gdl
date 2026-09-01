@@ -1,26 +1,382 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tokens — ver design.md §2, §3, §4
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Marca. `glow` es SOLO luz: nunca como color de texto (1.9:1, falla AA). */
+  --color-glow: #0cbdff;
+  --color-brand: #289dd1;
+  --color-brand-strong: #1f87b7;
+  --color-deep: #365b6d;
+  --color-ink: #1d4355;
+  --color-mist: #c9e6f3;
+  --color-haze: #f4fafd;
+  --color-neutral: #777777;
+
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(2.5rem, 5.5vw, 4.25rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-h1: clamp(2rem, 4vw, 3rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.025em;
+
+  --text-h2: clamp(1.5rem, 2.6vw, 2.125rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: clamp(1.25rem, 1.8vw, 1.5rem);
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-body: 1.0625rem; /* 17px */
+  --text-body--line-height: 1.65;
+
+  --radius-card: 20px;
+
+  --container-site: 1200px;
+  --container-wide: 1360px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    /* Ninguna sección puede provocar scroll horizontal (design.md §10). */
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-deep);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-glow) 26%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* El menú móvil usa <details>/<summary> nativo: cero JavaScript. */
+  summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Utilidades del sistema (design.md §5)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-wide {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: clamp(4rem, 9vw, 8rem);
+  }
+
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* Capa 2 — solo 3 usos permitidos, ver design.md §5 */
+  .glass {
+    background: color-mix(in srgb, #fff 62%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid color-mix(in srgb, var(--color-glow) 22%, transparent);
+    box-shadow: 0 8px 32px -12px color-mix(in srgb, var(--color-ink) 24%, transparent);
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass {
+      background: #fff;
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass {
+      background: #fff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  .glass-dark {
+    background: color-mix(in srgb, var(--color-ink) 52%, transparent);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    border: 1px solid color-mix(in srgb, #fff 26%, transparent);
+    color: #fff;
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass-dark {
+      background: var(--color-ink);
+    }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass-dark {
+      background: var(--color-ink);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  /* Capa 1 */
+  .card {
+    background: #fff;
+    border: 1px solid color-mix(in oklab, var(--color-mist) 70%, transparent);
+    border-radius: var(--radius-card);
+    box-shadow:
+      0 1px 2px rgb(29 67 85 / 0.04),
+      0 8px 24px -16px rgb(29 67 85 / 0.18);
+    transition:
+      border-color 180ms cubic-bezier(0.2, 0.7, 0.3, 1),
+      box-shadow 180ms cubic-bezier(0.2, 0.7, 0.3, 1),
+      transform 180ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible {
+    border-color: color-mix(in oklab, var(--color-brand) 40%, transparent);
+    box-shadow:
+      0 2px 4px rgb(29 67 85 / 0.05),
+      0 18px 40px -24px rgb(29 67 85 / 0.32);
+    transform: translateY(-2px);
+  }
+
+  /* Hairline de marca */
+  .hairline {
+    position: relative;
+  }
+  .hairline::before {
+    content: '';
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-glow), transparent);
+  }
+
+  /* Capa 0 — radial-gradient, nunca filter:blur() (design.md §2) */
+  .blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle closest-side,
+      color-mix(in oklab, var(--color-glow) 38%, transparent),
+      transparent
+    );
+  }
+
+  /* Botones */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      background-color 180ms cubic-bezier(0.2, 0.7, 0.3, 1),
+      border-color 180ms,
+      transform 180ms,
+      box-shadow 180ms;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+    box-shadow: 0 10px 24px -12px color-mix(in oklab, var(--color-brand) 70%, transparent);
+  }
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    background: var(--color-brand-strong);
+    box-shadow: 0 14px 30px -12px color-mix(in oklab, var(--color-brand) 80%, transparent);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--color-deep);
+    border: 1px solid var(--color-mist);
+  }
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    border-color: var(--color-brand);
+    background: var(--color-haze);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-brand);
+    min-height: 44px;
+    padding-inline: 0.25rem;
+  }
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible {
+    color: var(--color-brand-strong);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    background: var(--color-haze);
+    color: var(--color-deep);
+    border: 1px solid color-mix(in oklab, var(--color-mist) 80%, transparent);
+  }
+
+  .prose-mh p {
+    color: var(--color-neutral);
+    margin-block-end: 1.125rem;
+  }
+  .prose-mh p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Tinte de marca sobre fotos de stock, para que se vean de una familia */
+  .photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+  .photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklab, var(--color-glow) 8%, transparent);
+    pointer-events: none;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px -8px rgb(29 67 85 / 0.3);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Movimiento — tres animaciones en todo el sitio (design.md §7)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes mh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: mh-rise 700ms cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+}
+
+/*
+ * Reveal se degrada a "visible": sin JavaScript el contenido se ve completo.
+ * El Client Component añade data-reveal="pending" y solo entonces se oculta.
+ */
+[data-reveal='pending'] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 500ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    transform 500ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }

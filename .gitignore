@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Salida del export estático
+/out
+
+# Generado por scripts/build-images.mjs (se regenera en cada build).
+# content/image-manifest.json SÍ se versiona: sin él `pnpm dev` no arranca.
+/public/img
+
+# QA
+/.playwright-mcp
+/qa-*.png
