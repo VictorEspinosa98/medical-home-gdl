@@ -17,7 +17,7 @@ import { HERO } from '../content/home'
 import { HTML_LANG, LOCALES, type Locale } from '../content/locales'
 import { PAGES, page } from '../content/pages'
 import { SERVICES_BASE, sortedServices } from '../content/services'
-import { SITE } from '../content/site'
+import { SITE, addressDisplay, allAreaNames } from '../content/site'
 import { mdUrlFor } from '../lib/urls'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -44,8 +44,11 @@ const contactBlock = (lang: Locale) =>
         `- WhatsApp: https://wa.me/${SITE.whatsapp}`,
         `- Teléfono: ${SITE.phone}`,
         `- Correo: ${SITE.email}`,
+        `- Consultorio: ${addressDisplay}`,
         '- Horario: 24 horas, los 7 días de la semana',
-        `- Cobertura: ${SITE.areas.join(', ')} (Jalisco, México)`,
+        `- Cobertura: ${SITE.areas.join(', ')} (Jalisco, México); ${SITE.otherCities
+          .map((c) => `${c.name}, ${c.state}`)
+          .join('; ')}`,
         `- Tiempo de llegada: menos de ${SITE.responseMinutes} minutos`,
       ].join('\n')
     : [
@@ -54,8 +57,11 @@ const contactBlock = (lang: Locale) =>
         `- WhatsApp: https://wa.me/${SITE.whatsapp}`,
         `- Phone: ${SITE.phone}`,
         `- Email: ${SITE.email}`,
+        `- Clinic: ${addressDisplay}`,
         '- Hours: 24 hours a day, 7 days a week',
-        `- Coverage: ${SITE.areas.join(', ')} (Jalisco, Mexico)`,
+        `- Coverage: ${SITE.areas.join(', ')} (Jalisco, Mexico); ${SITE.otherCities
+          .map((c) => `${c.name}, ${c.state}`)
+          .join('; ')}`,
         `- Arrival time: under ${SITE.responseMinutes} minutes`,
       ].join('\n')
 
@@ -273,8 +279,8 @@ function llmsIndex(): string {
     '',
     `- Nombre / Name: ${SITE.name}`,
     `- Tipo / Type: Servicio médico a domicilio (house-call medical service)`,
-    `- Ubicación / Location: Guadalajara, Jalisco, México`,
-    `- Cobertura / Coverage: ${SITE.areas.join(', ')}`,
+    `- Ubicación / Location: ${addressDisplay}, México`,
+    `- Cobertura / Coverage: ${allAreaNames.join(', ')}`,
     `- Horario / Hours: 24/7, todos los días del año`,
     `- Tiempo de respuesta / Response time: < ${SITE.responseMinutes} min`,
     `- Idiomas / Languages: Español, English`,

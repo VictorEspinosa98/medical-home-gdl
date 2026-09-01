@@ -8,8 +8,9 @@ export type Area = {
 }
 
 /**
- * Municipios de la Zona Metropolitana de Guadalajara con cobertura.
- * El orden es por volumen de demanda esperado, no alfabético.
+ * Zonas con cobertura. Primero los seis municipios de la Zona Metropolitana
+ * de Guadalajara —ordenados por volumen de demanda esperado, no
+ * alfabéticamente— y al final las dos ciudades foráneas.
  */
 export const AREAS: Area[] = [
   {
@@ -60,13 +61,29 @@ export const AREAS: Area[] = [
       en: 'Town centre and localities along the free road to Zapotlanejo.',
     },
   },
+  {
+    id: 'morelia',
+    name: 'Morelia, Michoacán',
+    zones: {
+      es: 'Centro histórico, Chapultepec, Las Américas, Altozano, Tres Marías y colonias aledañas. Confirma la dirección por WhatsApp para darte el tiempo exacto de llegada.',
+      en: 'Historic centre, Chapultepec, Las Americas, Altozano, Tres Marias and nearby neighbourhoods. Confirm your address on WhatsApp and we will give you the exact arrival time.',
+    },
+  },
+  {
+    id: 'queretaro',
+    name: 'Querétaro, Querétaro',
+    zones: {
+      es: 'Centro histórico, Juriquilla, El Refugio, Milenio III, Zibatá y zona Álamos. Confirma la dirección por WhatsApp para darte el tiempo exacto de llegada.',
+      en: 'Historic centre, Juriquilla, El Refugio, Milenio III, Zibata and the Alamos area. Confirm your address on WhatsApp and we will give you the exact arrival time.',
+    },
+  },
 ]
 
 export const COVERAGE_COPY = {
   /** Bloque extraíble: responde la pregunta literal con la lista completa. */
   answer: {
-    es: 'Medical Home Gdl cubre seis municipios de la Zona Metropolitana de Guadalajara: Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonalá, Tlajomulco de Zúñiga y Zapotlanejo. El servicio opera las 24 horas del día, todos los días del año, y el médico llega en menos de 1 hora.',
-    en: 'Medical Home Gdl covers six municipalities of the Guadalajara metropolitan area: Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonala, Tlajomulco de Zuniga and Zapotlanejo. The service runs 24 hours a day, every day of the year, and the doctor arrives in under 1 hour.',
+    es: 'Medical Home Gdl cubre los seis municipios de la Zona Metropolitana de Guadalajara —Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonalá, Tlajomulco de Zúñiga y Zapotlanejo— y también atiende en Morelia, Michoacán y en Querétaro. El servicio opera las 24 horas del día, todos los días del año, y en la zona metropolitana el médico llega en menos de 1 hora.',
+    en: 'Medical Home Gdl covers the six municipalities of the Guadalajara metropolitan area — Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonala, Tlajomulco de Zuniga and Zapotlanejo — and also serves Morelia, Michoacan and Queretaro. The service runs 24 hours a day, every day of the year, and within the metro area the doctor arrives in under 1 hour.',
   },
   outsideTitle: {
     es: '¿Estás fuera de estos municipios?',

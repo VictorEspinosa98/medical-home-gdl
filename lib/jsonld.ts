@@ -1,7 +1,7 @@
 import type { Faq } from '@/content/faq'
 import { HTML_LANG, type Locale } from '@/content/locales'
 import type { Service } from '@/content/services'
-import { SITE, socialProfiles } from '@/content/site'
+import { SITE, allAreaNames, socialProfiles } from '@/content/site'
 import { absolute } from './urls'
 
 /**
@@ -27,8 +27,8 @@ export function medicalBusinessSchema(lang: Locale) {
     logo: absolute('/img/brand/logo-full-640.webp'),
     description:
       lang === 'es'
-        ? 'Servicio de atención médica a domicilio en la Zona Metropolitana de Guadalajara. Médicos titulados en tu casa en menos de 1 hora, las 24 horas del día.'
-        : 'House-call medical service in the Guadalajara metropolitan area. Licensed doctors at your address in under 1 hour, 24 hours a day.',
+        ? 'Servicio de atención médica a domicilio en la Zona Metropolitana de Guadalajara, Morelia y Querétaro. Médicos titulados en tu casa en menos de 1 hora, las 24 horas del día.'
+        : 'House-call medical service in the Guadalajara metropolitan area, Morelia and Queretaro. Licensed doctors at your address in under 1 hour, 24 hours a day.',
     medicalSpecialty: 'PrimaryCare',
     availableLanguage: [
       { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
@@ -51,10 +51,17 @@ export function medicalBusinessSchema(lang: Locale) {
       latitude: SITE.geo.lat,
       longitude: SITE.geo.lng,
     },
-    areaServed: SITE.areas.map((name) => ({
+    areaServed: [
+      ...SITE.areas.map((name) => ({ '@type': 'City' as const, name, state: 'Jalisco' })),
+      ...SITE.otherCities.map((c) => ({ '@type': 'City' as const, name: c.name, state: c.state })),
+    ].map(({ name, state }) => ({
       '@type': 'City',
       name,
-      containedInPlace: { '@type': 'State', name: 'Jalisco', address: { '@type': 'PostalAddress', addressCountry: 'MX' } },
+      containedInPlace: {
+        '@type': 'State',
+        name: state,
+        address: { '@type': 'PostalAddress', addressCountry: 'MX' },
+      },
     })),
     openingHoursSpecification: [
       {
@@ -89,7 +96,7 @@ export function serviceSchema(service: Service, lang: Locale, url: string) {
     inLanguage: HTML_LANG[lang],
     image: absolute(`${service.image}-1280.webp`),
     provider: { '@id': BUSINESS_ID },
-    areaServed: SITE.areas.map((name) => ({ '@type': 'City', name })),
+    areaServed: allAreaNames.map((name) => ({ '@type': 'City', name })),
     ...(service.schemaType === 'Service'
       ? { serviceType: t.shortName, providerMobility: 'dynamic' }
       : { howPerformed: t.intro.split('\n\n')[0] }),

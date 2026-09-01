@@ -6,21 +6,23 @@ Sitio corporativo bilingüe (ES/EN) para servicios médicos a domicilio en la Zo
 
 ---
 
-## ⚠️ Lo primero: los datos de contacto
+## Datos de contacto
 
-El sitio está completo salvo por **cuatro valores** que el cliente aún no entregó. Están todos en un solo archivo:
+Viven en **un solo archivo**, `content/site.ts`. Cambiar un valor ahí se propaga solo a: botón flotante de WhatsApp, los CTAs de cada sección, el footer, la página de contacto, el JSON-LD `MedicalBusiness`, `llms.txt` y los 32 archivos Markdown. **No hay ningún otro lugar donde estén escritos.**
 
-**`content/site.ts`** — busca los comentarios `← PENDIENTE`:
+| Dato | Valor |
+|---|---|
+| WhatsApp / teléfono | `+52 33 1244 6771` |
+| Correo | `medicalhomegdl@gmail.com` |
+| Consultorio | C. Juan Álvarez 2470, Ladrón de Guevara, 44650 Guadalajara, Jal. |
+| Cobertura | ZMG (6 municipios) + Morelia, Michoacán + Querétaro |
 
-```ts
-whatsapp: '523300000000',                 // ← formato wa.me: 52 + 10 dígitos, sin + ni espacios
-phone:    '+523300000000',                // ← E.164
-email:    'contacto@medicalhomegdl.com',  // ← confirmar
-address.street / postalCode               // ← opcionales
-social.facebook / instagram / googleBusiness
-```
+Dos cosas siguen abiertas en ese archivo:
 
-Cambiarlos ahí se propaga solo a: botón flotante de WhatsApp, los CTAs de cada sección, el footer, la página de contacto, el JSON-LD `MedicalBusiness`, `llms.txt` y los 32 archivos Markdown. **No hay ningún otro lugar donde estén escritos.**
+- **`geo`** — las coordenadas son aproximadas a la colonia. Cópialas del pin exacto del Google Business Profile; un `geo` desalineado con la ficha debilita el SEO local.
+- **`social`** — Facebook, Instagram y Google Business están vacíos y por eso el JSON-LD omite `sameAs`.
+
+> Si el enlace de WhatsApp no abriera el chat, el número está registrado con el `1` heredado de México: cambia `whatsapp` a `'5213312446771'`. El `tel:` no se toca, ese sí es E.164.
 
 ### Información que conviene pedir al cliente
 

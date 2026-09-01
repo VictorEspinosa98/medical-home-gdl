@@ -1,7 +1,7 @@
 import type { Locale } from '@/content/locales'
 import { PAGES, pagePath } from '@/content/pages'
 import { SERVICES_BASE, sortedServices } from '@/content/services'
-import { SITE, mailLink, telLink } from '@/content/site'
+import { SITE, addressDisplay, mailLink, phoneDisplay, telLink } from '@/content/site'
 import { UI } from '@/content/ui'
 import { MailIcon, PhoneIcon, PinIcon } from './Icons'
 import { Logo } from './Img'
@@ -87,7 +87,7 @@ export function Footer({ lang }: { lang: Locale }) {
                   className="flex items-center gap-2 text-[0.9375rem] text-neutral transition-colors hover:text-brand"
                 >
                   <PhoneIcon className="h-[1.05em] w-[1.05em] shrink-0 text-brand" />
-                  {SITE.phone}
+                  {phoneDisplay}
                 </a>
               </li>
               <li>
@@ -98,6 +98,13 @@ export function Footer({ lang }: { lang: Locale }) {
                   <MailIcon className="mt-1 h-[1.05em] w-[1.05em] shrink-0 text-brand" />
                   {SITE.email}
                 </a>
+              </li>
+              <li className="flex items-start gap-2 text-[0.875rem] leading-relaxed text-neutral">
+                <PinIcon className="mt-1 h-[1.05em] w-[1.05em] shrink-0 text-brand" />
+                <span>
+                  <span className="block font-medium text-deep">{t.addressLabel}</span>
+                  {addressDisplay}
+                </span>
               </li>
             </ul>
             <p className="mt-4 text-[0.9375rem] font-medium text-deep">{t.hoursValue}</p>

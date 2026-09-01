@@ -21,7 +21,7 @@ export const FAQ: Record<Locale, Faq[]> = {
     },
     {
       q: '¿En qué municipios dan servicio?',
-      a: 'Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonalá, Tlajomulco de Zúñiga y Zapotlanejo.',
+      a: 'En Jalisco atendemos Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonalá, Tlajomulco de Zúñiga y Zapotlanejo. También damos servicio en Morelia, Michoacán y en Querétaro.',
     },
     {
       q: '¿Cuánto cuesta una consulta a domicilio?',
@@ -71,7 +71,7 @@ export const FAQ: Record<Locale, Faq[]> = {
     },
     {
       q: 'Which areas do you cover?',
-      a: 'Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonala, Tlajomulco de Zuniga and Zapotlanejo.',
+      a: 'In Jalisco we cover Guadalajara, Zapopan, San Pedro Tlaquepaque, Tonala, Tlajomulco de Zuniga and Zapotlanejo. We also serve Morelia, Michoacan and Queretaro.',
     },
     {
       q: 'Do your doctors speak English?',

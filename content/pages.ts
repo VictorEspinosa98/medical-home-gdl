@@ -107,18 +107,18 @@ export const PAGES: StaticPage[] = [
       navLabel: 'Cobertura y contacto',
       metaTitle: 'Cobertura y Contacto en Guadalajara | Medical Home Gdl',
       metaDescription:
-        'Atendemos Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco y Zapotlanejo, las 24 horas. Contáctanos por WhatsApp, teléfono o correo.',
+        'Atendemos toda la Zona Metropolitana de Guadalajara, más Morelia y Querétaro, las 24 horas. Contáctanos por WhatsApp, teléfono o correo.',
       h1: 'Dónde atendemos y cómo contactarnos',
-      lede: 'Cubrimos los seis municipios de la Zona Metropolitana de Guadalajara, las 24 horas del día, todos los días del año.',
+      lede: 'Cubrimos los seis municipios de la Zona Metropolitana de Guadalajara y también atendemos en Morelia y Querétaro, las 24 horas del día, todos los días del año.',
     },
     en: {
       path: '/en/coverage/',
       navLabel: 'Coverage & contact',
       metaTitle: 'Coverage and Contact in Guadalajara | Medical Home Gdl',
       metaDescription:
-        'We cover Guadalajara, Zapopan, Tlaquepaque, Tonala, Tlajomulco and Zapotlanejo, 24 hours a day. Reach us on WhatsApp, phone or email.',
+        'We cover the whole Guadalajara metro area, plus Morelia and Queretaro, 24 hours a day. Reach us on WhatsApp, phone or email.',
       h1: 'Where we go and how to reach us',
-      lede: 'We cover all six municipalities of the Guadalajara metropolitan area, 24 hours a day, every day of the year.',
+      lede: 'We cover all six municipalities of the Guadalajara metropolitan area, and we also serve Morelia and Queretaro, 24 hours a day, every day of the year.',
     },
   },
   {

@@ -92,8 +92,10 @@ export function CtaBand({
           </a>
         </div>
         <p className="mt-6 text-[0.9375rem] text-mist/80">
-          {UI[lang].hoursValue} · {SITE.areas.length}{' '}
-          {lang === 'es' ? 'municipios de la ZMG' : 'municipalities in the metro area'}
+          {UI[lang].hoursValue} ·{' '}
+          {lang === 'es'
+            ? 'toda la ZMG, Morelia y Querétaro'
+            : 'all of metro Guadalajara, Morelia and Queretaro'}
         </p>
       </div>
     </section>

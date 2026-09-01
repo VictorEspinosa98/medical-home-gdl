@@ -42,6 +42,7 @@ type Ui = {
   hours: string
   hoursValue: string
   coverageLabel: string
+  addressLabel: string
   whatsappLabel: string
   phoneLabel: string
   emailLabel: string
@@ -93,6 +94,7 @@ export const UI: Record<Locale, Ui> = {
     hours: 'Horario',
     hoursValue: '24 horas, los 7 días de la semana',
     coverageLabel: 'Cobertura',
+    addressLabel: 'Consultorio',
     whatsappLabel: 'WhatsApp',
     phoneLabel: 'Teléfono',
     emailLabel: 'Correo',
@@ -143,6 +145,7 @@ export const UI: Record<Locale, Ui> = {
     hours: 'Hours',
     hoursValue: '24 hours a day, 7 days a week',
     coverageLabel: 'Coverage',
+    addressLabel: 'Clinic',
     whatsappLabel: 'WhatsApp',
     phoneLabel: 'Phone',
     emailLabel: 'Email',

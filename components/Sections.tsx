@@ -1,7 +1,7 @@
 import type { Faq } from '@/content/faq'
 import type { Locale } from '@/content/locales'
 import { pagePath } from '@/content/pages'
-import { SITE, mailLink, telLink } from '@/content/site'
+import { SITE, addressDisplay, allAreaNames, mailLink, phoneDisplay, telLink } from '@/content/site'
 import { UI } from '@/content/ui'
 import { CallCta, WhatsAppCta } from './Cta'
 import { ArrowIcon, CheckIcon, ClockIcon, MailIcon, PhoneIcon, PinIcon } from './Icons'
@@ -142,7 +142,7 @@ export function ContactCard({ lang, message }: { lang: Locale; message: string }
             <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
               {t.coverageLabel}
             </dt>
-            <dd className="text-neutral">{SITE.areas.join(' · ')}</dd>
+            <dd className="text-neutral">{allAreaNames.join(' · ')}</dd>
           </div>
         </div>
         <div className="flex items-start gap-3">
@@ -153,7 +153,7 @@ export function ContactCard({ lang, message }: { lang: Locale; message: string }
             </dt>
             <dd>
               <a href={telLink()} className="text-neutral transition-colors hover:text-brand">
-                {SITE.phone}
+                {phoneDisplay}
               </a>
             </dd>
           </div>
@@ -172,6 +172,15 @@ export function ContactCard({ lang, message }: { lang: Locale; message: string }
                 {SITE.email}
               </a>
             </dd>
+          </div>
+        </div>
+        <div className="flex items-start gap-3">
+          <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+          <div>
+            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
+              {t.addressLabel}
+            </dt>
+            <dd className="text-[0.9375rem] leading-relaxed text-neutral">{addressDisplay}</dd>
           </div>
         </div>
       </dl>

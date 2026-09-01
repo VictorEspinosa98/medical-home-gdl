@@ -9,8 +9,8 @@ export const HERO = {
   badge: { es: 'Disponible 24 horas', en: 'Available 24 hours' },
   /** Bloque extraíble para LLMs: dato duro, autocontenido, primera pantalla. */
   answer: {
-    es: 'Medical Home Gdl es un servicio de atención médica a domicilio en Guadalajara, Jalisco. Un médico titulado llega a tu casa, hotel o departamento en menos de 1 hora, las 24 horas del día, en Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco y Zapotlanejo.',
-    en: 'Medical Home Gdl is a house-call medical service in Guadalajara, Mexico. A licensed doctor reaches your home, hotel or apartment in under 1 hour, 24 hours a day, across Guadalajara, Zapopan, Tlaquepaque, Tonala, Tlajomulco and Zapotlanejo. English-speaking doctors available on request.',
+    es: 'Medical Home Gdl es un servicio de atención médica a domicilio en Guadalajara, Jalisco. Un médico titulado llega a tu casa, hotel o departamento en menos de 1 hora, las 24 horas del día, en Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco y Zapotlanejo. También atendemos en Morelia, Michoacán y en Querétaro.',
+    en: 'Medical Home Gdl is a house-call medical service in Guadalajara, Mexico. A licensed doctor reaches your home, hotel or apartment in under 1 hour, 24 hours a day, across Guadalajara, Zapopan, Tlaquepaque, Tonala, Tlajomulco and Zapotlanejo. We also serve Morelia and Queretaro. English-speaking doctors available on request.',
   },
   imageAlt: {
     es: 'Médico de Medical Home Gdl atendiendo a una paciente en la sala de su casa',
