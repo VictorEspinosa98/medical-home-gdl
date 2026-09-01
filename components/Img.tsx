@@ -16,6 +16,7 @@ export function Img({
   src,
   alt,
   aspect = '4 / 3',
+  bleed = false,
   sizes = '(min-width: 1024px) 33vw, 100vw',
   priority = false,
   className = '',
@@ -26,6 +27,8 @@ export function Img({
   src: string
   alt: string
   aspect?: string
+  /** A sangre: llena el contenedor padre en vez de imponer un aspect-ratio. */
+  bleed?: boolean
   sizes?: string
   priority?: boolean
   className?: string
@@ -45,8 +48,8 @@ export function Img({
 
   return (
     <div
-      className={`${tint ? 'photo' : ''} relative overflow-hidden ${className}`}
-      style={{ aspectRatio: aspect }}
+      className={`${tint ? 'photo' : ''} ${bleed ? 'absolute inset-0' : 'relative'} overflow-hidden ${className}`}
+      style={bleed ? undefined : { aspectRatio: aspect }}
     >
       <Image
         src={entry.base}

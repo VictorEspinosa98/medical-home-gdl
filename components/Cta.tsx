@@ -26,7 +26,7 @@ export function WhatsAppCta({
       href={waLink(message)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`btn btn-${variant} ${className}`}
+      className={`btn ${variant === 'primary' ? 'btn-wa' : 'btn-secondary'} ${className}`}
     >
       <WhatsAppIcon className="h-[1.35em] w-[1.35em] shrink-0" />
       {label ?? UI[lang].ctaWhatsapp}

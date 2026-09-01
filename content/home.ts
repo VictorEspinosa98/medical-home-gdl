@@ -13,8 +13,8 @@ export const HERO = {
     en: 'Medical Home Gdl is a house-call medical service in Guadalajara, Mexico. A licensed doctor reaches your home, hotel or apartment in under 1 hour, 24 hours a day, across Guadalajara, Zapopan, Tlaquepaque, Tonala, Tlajomulco and Zapotlanejo. We also serve Morelia and Queretaro. English-speaking doctors available on request.',
   },
   imageAlt: {
-    es: 'Médico de Medical Home Gdl atendiendo a una paciente en la sala de su casa',
-    en: 'Medical Home Gdl doctor attending a patient in her living room',
+    es: 'Médico de Medical Home Gdl explicando un tratamiento a un paciente mayor',
+    en: 'Medical Home Gdl doctor explaining a treatment to an older patient',
   },
 } as const
 

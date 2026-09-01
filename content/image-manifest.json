@@ -20,14 +20,14 @@
     "height": 124
   },
   "/img/hero": {
-    "base": "/img/hero.c8cf0e08",
-    "width": 2000,
-    "height": 1333
-  },
-  "/img/services/certificados": {
-    "base": "/img/services/certificados.1fc4c81d",
+    "base": "/img/hero.1fc4c81d",
     "width": 1707,
     "height": 2560
+  },
+  "/img/services/certificados": {
+    "base": "/img/services/certificados.c8cf0e08",
+    "width": 2000,
+    "height": 1333
   },
   "/img/services/consulta-domicilio": {
     "base": "/img/services/consulta-domicilio.c464387e",

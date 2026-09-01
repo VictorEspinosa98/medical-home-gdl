@@ -1011,8 +1011,8 @@ export const SERVICES: Service[] = [
     order: 10,
     image: '/img/services/certificados',
     alt: {
-      es: 'Médico entregando documentación médica a un paciente',
-      en: 'Doctor handing medical documentation to a patient',
+      es: 'Médico revisando documentación médica con una paciente en su casa',
+      en: 'Doctor going over medical paperwork with a patient at her home',
     },
     schemaType: 'Service',
     es: {

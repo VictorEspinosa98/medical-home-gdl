@@ -36,8 +36,8 @@ export const PAGES: StaticPage[] = [
       metaTitle: 'Médico a Domicilio en Guadalajara 24/7 | Medical Home Gdl',
       metaDescription:
         'Un médico titulado llega a tu casa en menos de 1 hora, las 24 horas, en toda la Zona Metropolitana de Guadalajara. Consultas, laboratorio, sueros y más.',
-      h1: 'Todo lo que necesitas para cuidar tu salud',
-      lede: 'Atención médica inmediata, estudios de laboratorio y cuidados profesionales a domicilio, en Guadalajara y toda la zona metropolitana.',
+      h1: 'Tu consultorio y laboratorio médico a domicilio',
+      lede: 'Todo lo que necesitas para cuidar tu salud, las 24 horas, en Guadalajara y toda la zona metropolitana.',
     },
     en: {
       path: '/en/',
@@ -45,8 +45,8 @@ export const PAGES: StaticPage[] = [
       metaTitle: 'Doctor at Home in Guadalajara 24/7 | Medical Home Gdl',
       metaDescription:
         'A licensed, English-speaking doctor at your home, hotel or Airbnb in under 1 hour, 24/7, across Guadalajara. House calls, lab tests, IV therapy and more.',
-      h1: 'Everything you need to take care of your health',
-      lede: 'Immediate medical care, lab tests and professional nursing at your home, hotel or Airbnb in Guadalajara. English-speaking doctors, 24 hours a day.',
+      h1: 'Your doctor and lab, at your door',
+      lede: 'Everything you need to take care of your health, 24 hours a day, across Guadalajara. English-speaking doctors on request.',
     },
   },
   {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { CtaBand, FloatingWhatsApp, WhatsAppCta } from '@/components/Cta'
 import { Header } from '@/components/Header'
-import { ArrowIcon, ClockIcon, PILLAR_ICONS, ShieldIcon } from '@/components/Icons'
+import { ArrowIcon, ClockIcon, PILLAR_ICONS, PhoneIcon, ShieldIcon } from '@/components/Icons'
 import { Img } from '@/components/Img'
 import { JsonLd } from '@/components/JsonLd'
 import { Reveal } from '@/components/Reveal'
@@ -12,6 +12,7 @@ import { ABOUT_TEASER, FINAL_CTA, HERO, PILLARS, STEPS, STEPS_HEADING } from '@/
 import { LOCALES, type Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
 import { sortedServices } from '@/content/services'
+import { telLink } from '@/content/site'
 import { UI } from '@/content/ui'
 import { faqPageSchema } from '@/lib/jsonld'
 import { buildMetadata } from '@/lib/metadata'
@@ -49,101 +50,74 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
       <Header lang={lang} currentRef={pageRef('home')} />
 
       <main id="main">
-        {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-haze pb-16 pt-12 md:pb-24 md:pt-16">
-          <div
-            className="blob blob-breathe left-[-14%] top-[-18%] h-[560px] w-[560px] opacity-70"
-            aria-hidden
+        {/* ── Hero ─────────────────────────────────────────────────────────
+         * Banner a sangre: foto de fondo + velo azul, todo el contenido
+         * centrado encima. Mismo bloque en móvil, solo cambia el ritmo.
+         */}
+        <section className="relative isolate flex min-h-[540px] items-center overflow-hidden md:min-h-[640px]">
+          <Img
+            src="/img/hero"
+            alt={HERO.imageAlt[lang]}
+            bleed
+            tint={false}
+            priority
+            sizes="100vw"
+            /* Foto vertical dentro de un banner apaisado: el recorte deja solo
+             * una franja, así que un desenfoque suave la convierte en textura
+             * (y es el look del banner anterior). scale-105 tapa el borde
+             * translúcido que deja blur() en los cantos. */
+            imgClassName="scale-105 object-[50%_16%] blur-[3px]"
           />
-          <div
-            className="blob blob-breathe bottom-[-30%] right-[-10%] h-[460px] w-[460px] opacity-50"
-            aria-hidden
-          />
+          <div className="hero-veil absolute inset-0" aria-hidden />
 
-          <div className="container-wide relative z-10">
-            <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-              <div className="lg:col-span-6">
-                <p
-                  className="hero-in chip"
-                  style={{ animationDelay: '0ms' }}
-                >
-                  <span className="pulse-dot" aria-hidden />
-                  {HERO.badge[lang]}
-                </p>
+          <div className="container-site relative z-10 py-20 text-center md:py-28">
+            <p className="hero-in chip" style={{ animationDelay: '0ms' }}>
+              <span className="pulse-dot" aria-hidden />
+              {HERO.badge[lang]}
+            </p>
 
-                <h1
-                  className="hero-in mt-6 text-display"
-                  style={{ animationDelay: '60ms' }}
-                >
-                  {p.h1}
-                </h1>
+            <h1
+              className="hero-in mx-auto mt-6 max-w-4xl text-display text-white"
+              style={{ animationDelay: '60ms' }}
+            >
+              {p.h1}
+            </h1>
 
-                <p
-                  className="hero-in mt-6 max-w-lg text-[1.125rem] leading-relaxed text-neutral"
-                  style={{ animationDelay: '120ms' }}
-                >
-                  {p.lede}
-                </p>
-
-                <div
-                  className="hero-in mt-9 flex flex-col gap-3 sm:flex-row"
-                  style={{ animationDelay: '180ms' }}
-                >
-                  <WhatsAppCta lang={lang} message={FINAL_CTA[lang].wa} />
-                  <a href={pagePath(lang, 'services')} className="btn btn-secondary">
-                    {t.ctaServices}
-                  </a>
-                </div>
-
-                <ul
-                  className="hero-in mt-9 flex flex-wrap gap-x-7 gap-y-3"
-                  style={{ animationDelay: '240ms' }}
-                >
-                  <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
-                    <ClockIcon className="h-[1.15em] w-[1.15em] text-brand" />
-                    {t.responseTime}
-                  </li>
-                  <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
-                    <ShieldIcon className="h-[1.15em] w-[1.15em] text-brand" />
-                    {t.licensedDoctors}
-                  </li>
-                </ul>
-              </div>
-
-              <div className="lg:col-span-6 lg:col-start-7">
-                <div className="relative">
-                  <Img
-                    src="/img/hero"
-                    alt={HERO.imageAlt[lang]}
-                    aspect="4 / 3"
-                    sizes="(min-width: 1024px) 620px, 94vw"
-                    priority
-                    className="shadow-[0_40px_80px_-40px_rgba(29,67,85,0.45)]"
-                  />
-                  {/* .glass #1 de los 3 permitidos (design.md §5) */}
-                  <div
-                    className="hero-in glass absolute bottom-4 left-4 rounded-2xl px-5 py-3.5 md:bottom-6 md:left-6"
-                    style={{ animationDelay: '320ms' }}
-                  >
-                    <p className="flex items-center gap-2.5 text-[0.9375rem] font-semibold text-deep">
-                      <span className="pulse-dot h-2.5 w-2.5" aria-hidden />
-                      {t.available247}
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div
+              className="hero-in mx-auto mt-9 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center"
+              style={{ animationDelay: '180ms' }}
+            >
+              <WhatsAppCta lang={lang} message={FINAL_CTA[lang].wa} />
+              <a href={telLink()} className="btn glass-dark text-white">
+                <PhoneIcon className="h-[1.2em] w-[1.2em] shrink-0" />
+                {t.ctaCall}
+              </a>
             </div>
 
-            {/* Bloque extraíble por LLMs, primer contenido tras el hero */}
-            <div className="mt-14 max-w-3xl">
-              <AnswerBlock>{HERO.answer[lang]}</AnswerBlock>
-            </div>
+            <ul
+              className="hero-in mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-white/90"
+              style={{ animationDelay: '240ms' }}
+            >
+              <li className="flex items-start gap-2 text-left text-[0.9375rem]">
+                <ClockIcon className="mt-[0.28em] h-[1.15em] w-[1.15em] shrink-0 text-glow" />
+                {t.responseTime}
+              </li>
+              <li className="flex items-start gap-2 text-left text-[0.9375rem]">
+                <ShieldIcon className="mt-[0.28em] h-[1.15em] w-[1.15em] shrink-0 text-glow" />
+                {t.licensedDoctors}
+              </li>
+            </ul>
           </div>
         </section>
 
         {/* ── Pilares ──────────────────────────────────────────────────── */}
         <section className="section">
           <div className="container-site">
+            {/* Bloque extraíble por LLMs, primer contenido tras el hero */}
+            <div className="mb-14 max-w-3xl">
+              <AnswerBlock>{HERO.answer[lang]}</AnswerBlock>
+            </div>
+
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {PILLARS[lang].map((pillar, i) => {
                 const Icon = PILLAR_ICONS[pillar.icon]
