@@ -58,7 +58,7 @@ export const SERVICES: Service[] = [
       shortName: 'Consulta médica a domicilio',
       metaTitle: 'Consulta Médica a Domicilio en Guadalajara | 24/7',
       metaDescription:
-        'Un médico llega a tu casa en menos de 1 hora, las 24 horas, en toda la Zona Metropolitana de Guadalajara. Sin filas, sin salir. Pide tu visita por WhatsApp.',
+        'Un médico llega a tu casa en menos de 1 hora, las 24 horas, en toda la Zona Metropolitana de Guadalajara. Pide tu visita por WhatsApp.',
       benefit: 'Un médico en tu puerta en menos de 1 hora, a cualquier hora',
       answer:
         'La consulta médica a domicilio de Medical Home Gdl lleva un médico titulado a tu casa en menos de 1 hora, las 24 horas del día, en Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco y Zapotlanejo. El médico revisa al paciente, da el diagnóstico y deja la receta en la misma visita.',
@@ -1126,7 +1126,7 @@ export const SERVICES: Service[] = [
       slug: 'paquete-prenupcial',
       name: 'Paquete prenupcial a domicilio',
       shortName: 'Paquete prenupcial',
-      metaTitle: 'Paquete Prenupcial a Domicilio en Guadalajara | Registro Civil',
+      metaTitle: 'Paquete Prenupcial a Domicilio en Guadalajara | 24/7',
       metaDescription:
         'Estudios y certificado médico prenupcial que pide el registro civil, hechos en tu casa. Para los dos, en una sola visita. Guadalajara.',
       benefit: 'El requisito del registro civil resuelto en una sola visita',
@@ -1239,3 +1239,39 @@ export const serviceBySlug = (lang: Locale, slug: string): Service | undefined =
   SERVICES.find((s) => s[lang].slug === slug)
 
 export const sortedServices = (): Service[] => [...SERVICES].sort((a, b) => a.order - b.order)
+
+/**
+ * Servicios relacionados, curados por afinidad clínica.
+ *
+ * Antes esto era `sortedServices().filter(no-soy-yo).slice(0, 3)`, que daba
+ * el MISMO trío (consulta, laboratorio, pruebas rápidas) en 8 de las 11
+ * páginas: nunca enlazaba curaciones desde suturas aunque son contiguas, y
+ * dejaba a los cinco servicios de `order` alto con un único enlace interno
+ * en todo el sitio — el del índice.
+ *
+ * Cada lista es de 3 y evita el top-3, que ya está enlazado desde portada y
+ * footer, salvo cuando la relación clínica lo justifica de verdad.
+ */
+const RELATED: Record<string, [string, string, string]> = {
+  'consulta-domicilio': ['evaluacion-completa', 'laboratorio', 'medicamentos'],
+  laboratorio: ['pruebas-rapidas', 'evaluacion-completa', 'consulta-domicilio'],
+  'pruebas-rapidas': ['laboratorio', 'sueros', 'consulta-domicilio'],
+  sueros: ['medicamentos', 'curaciones', 'pruebas-rapidas'],
+  medicamentos: ['sueros', 'curaciones', 'sondas'],
+  sondas: ['curaciones', 'medicamentos', 'suturas'],
+  suturas: ['curaciones', 'certificados', 'sondas'],
+  curaciones: ['suturas', 'sondas', 'medicamentos'],
+  'evaluacion-completa': ['laboratorio', 'certificados', 'prenupcial'],
+  certificados: ['prenupcial', 'evaluacion-completa', 'suturas'],
+  prenupcial: ['certificados', 'laboratorio', 'evaluacion-completa'],
+}
+
+export const relatedServices = (id: string): Service[] => {
+  const ids = RELATED[id]
+  if (!ids) throw new Error(`Sin servicios relacionados definidos para: ${id}`)
+  return ids.map((relatedId) => {
+    const service = SERVICES.find((s) => s.id === relatedId)
+    if (!service) throw new Error(`Servicio relacionado desconocido: ${relatedId}`)
+    return service
+  })
+}

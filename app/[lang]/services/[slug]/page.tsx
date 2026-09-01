@@ -4,6 +4,7 @@ import { ServiceDetail } from '@/components/pages/ServiceDetail'
 import { SERVICES, serviceBySlug } from '@/content/services'
 import { buildMetadata } from '@/lib/metadata'
 import { serviceRef } from '@/lib/urls'
+import { jsonLdImage } from '@/lib/jsonld'
 
 const LANG = 'en' as const
 
@@ -25,6 +26,9 @@ export async function generateMetadata({
     ref: serviceRef(service.id),
     title: service[LANG].metaTitle,
     description: service[LANG].metaDescription,
+    // Cada servicio comparte su propia foto en WhatsApp/Facebook, no la
+    // tarjeta genérica del sitio: el enlace compartido es el canal principal.
+    image: jsonLdImage(service.image, 1280),
   })
 }
 

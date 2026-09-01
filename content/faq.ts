@@ -25,7 +25,7 @@ export const FAQ: Record<Locale, Faq[]> = {
     },
     {
       q: '¿Cuánto cuesta una consulta a domicilio?',
-      a: 'El costo depende del servicio y de la zona. Escríbenos por WhatsApp con lo que necesitas y te damos el precio exacto antes de agendar, sin compromiso.',
+      a: 'La primera consulta médica a domicilio cuesta desde $600 MXN en Guadalajara y su Zona Metropolitana. El precio final depende del servicio y de la zona: te confirmamos el costo exacto por WhatsApp antes de agendar, sin compromiso.',
     },
     {
       q: '¿Cómo agendo una visita?',

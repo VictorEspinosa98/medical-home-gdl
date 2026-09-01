@@ -8,7 +8,7 @@ import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
 import { sortedServices } from '@/content/services'
 import { UI } from '@/content/ui'
-import { breadcrumbSchema, faqPageSchema } from '@/lib/jsonld'
+import { breadcrumbSchema, faqPageSchema, webPageSchema } from '@/lib/jsonld'
 import { pageRef, urlOf } from '@/lib/urls'
 
 export function FaqPage({ lang }: { lang: Locale }) {
@@ -68,7 +68,7 @@ export function FaqPage({ lang }: { lang: Locale }) {
                           {group.title}
                         </h3>
                         <div className="mt-3">
-                          <FaqList faqs={group.faqs} />
+                          <FaqList faqs={group.faqs} headingLevel="h4" />
                         </div>
                       </div>
                     ))}
@@ -96,6 +96,12 @@ export function FaqPage({ lang }: { lang: Locale }) {
       <FloatingWhatsApp lang={lang} message={FINAL_CTA[lang].wa} />
       <JsonLd
         data={[
+          webPageSchema({
+            lang,
+            ref: pageRef('faq'),
+            name: p.h1,
+            description: p.metaDescription,
+          }),
           faqPageSchema(allFaqs, url),
           breadcrumbSchema([
             { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },

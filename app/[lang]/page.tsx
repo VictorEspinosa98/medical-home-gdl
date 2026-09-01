@@ -9,13 +9,14 @@ import { Reveal } from '@/components/Reveal'
 import { AnswerBlock, SectionHead } from '@/components/Sections'
 import { ServiceCard } from '@/components/ServiceCard'
 import { FAQ } from '@/content/faq'
-import { ABOUT_TEASER, FINAL_CTA, HERO, PILLARS, STEPS, STEPS_HEADING } from '@/content/home'
+import { ABOUT_TEASER, FINAL_CTA, HERO, PILLARS, PILLARS_HEADING, STEPS, STEPS_HEADING } from '@/content/home'
 import { LOCALES, type Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
 import { sortedServices } from '@/content/services'
+import { PROMOS } from '@/content/promos'
 import { telLink } from '@/content/site'
 import { UI } from '@/content/ui'
-import { faqPageSchema } from '@/lib/jsonld'
+import { faqPageSchema, jsonLdImage, promoOfferSchema, webPageSchema } from '@/lib/jsonld'
 import { buildMetadata } from '@/lib/metadata'
 import { pageRef, urlOf } from '@/lib/urls'
 
@@ -45,6 +46,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
   const services = sortedServices()
   const featured = services.slice(0, 6)
   const topFaqs = FAQ[lang].slice(0, 5)
+  const homeUrl = urlOf(lang, pageRef('home'))
 
   return (
     <>
@@ -96,6 +98,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
               </a>
             </div>
 
+            <p
+              className="hero-in mx-auto mt-5 max-w-md text-[0.875rem] text-white/80"
+              style={{ animationDelay: '210ms' }}
+            >
+              {t.emergencyNotice}
+            </p>
+
             <ul
               className="hero-in mx-auto mt-9 flex max-w-sm flex-col items-start gap-x-7 gap-y-3 text-white/90 sm:max-w-3xl sm:flex-row sm:flex-wrap sm:justify-center"
               style={{ animationDelay: '240ms' }}
@@ -121,7 +130,12 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
               <AnswerBlock title={HERO.answerTitle[lang]}>{HERO.answer[lang]}</AnswerBlock>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <SectionHead
+              eyebrow={PILLARS_HEADING[lang].eyebrow}
+              title={PILLARS_HEADING[lang].title}
+            />
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {PILLARS[lang].map((pillar, i) => {
                 const Icon = PILLAR_ICONS[pillar.icon]
                 return (
@@ -130,7 +144,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-haze text-brand">
                         <Icon className="h-[1.375rem] w-[1.375rem]" />
                       </span>
-                      <h2 className="mt-5 text-h3">{pillar.title}</h2>
+                      <h3 className="mt-5 text-h3">{pillar.title}</h3>
                       <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-neutral">
                         {pillar.body}
                       </p>
@@ -263,7 +277,24 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
       </main>
 
       <FloatingWhatsApp lang={lang} message={FINAL_CTA[lang].wa} />
-      <JsonLd data={faqPageSchema(topFaqs, urlOf(lang, pageRef('home')))} />
+      <JsonLd
+        data={[
+          webPageSchema({
+            lang,
+            ref: pageRef('home'),
+            name: p.h1,
+            description: p.metaDescription,
+            image: jsonLdImage('/img/hero', 1280),
+            medical: true,
+          }),
+          faqPageSchema(topFaqs, homeUrl),
+          // Solo las promos con un precio numérico real emiten Offer; el
+          // resto ("Paquete con descuento") es copy, no un precio.
+          ...PROMOS[lang]
+            .map((promo) => promoOfferSchema(promo, lang, homeUrl))
+            .filter((offer) => offer !== null),
+        ]}
+      />
     </>
   )
 }

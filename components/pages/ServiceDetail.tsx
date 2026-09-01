@@ -16,9 +16,9 @@ import {
 import { ServiceCard } from '@/components/ServiceCard'
 import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
-import { type Service, sortedServices } from '@/content/services'
+import { relatedServices, type Service } from '@/content/services'
 import { UI } from '@/content/ui'
-import { breadcrumbSchema, faqPageSchema, serviceSchema } from '@/lib/jsonld'
+import { breadcrumbSchema, faqPageSchema, jsonLdImage, serviceSchema, webPageSchema } from '@/lib/jsonld'
 import { pageRef, serviceRef, urlOf } from '@/lib/urls'
 
 export function ServiceDetail({ service, lang }: { service: Service; lang: Locale }) {
@@ -27,9 +27,7 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
   const url = urlOf(lang, serviceRef(service.id))
   const servicesPage = page('services')[lang]
 
-  const related = sortedServices()
-    .filter((x) => x.id !== service.id)
-    .slice(0, 3)
+  const related = relatedServices(service.id)
 
   return (
     <>
@@ -168,6 +166,14 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
       <JsonLd
         data={[
           serviceSchema(service, lang, url),
+          webPageSchema({
+            lang,
+            ref: serviceRef(service.id),
+            name: s.name,
+            description: s.metaDescription,
+            image: jsonLdImage(service.image, 1280),
+            medical: true,
+          }),
           faqPageSchema(s.faq, url),
           breadcrumbSchema([
             { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },

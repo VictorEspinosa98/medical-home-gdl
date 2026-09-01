@@ -8,6 +8,7 @@ import type { Locale } from './locales'
  *  · Cada entrada abre WhatsApp con el mensaje ya escrito (`wa`).
  *  · Dejar el array vacío oculta la sección entera, sin tocar la portada.
  *  · `price` y `note` son opcionales: si no hay precio, se omite la línea.
+ *  · `PROMOS_VALID_UNTIL` se bumpea cada mes junto con las promos.
  */
 
 export type Promo = {
@@ -18,6 +19,30 @@ export type Promo = {
   note?: string
   /** Mensaje pre-llenado de WhatsApp. */
   wa: string
+}
+
+/**
+ * ⚠️  BUMPEAR CADA MES, JUNTO CON LAS PROMOCIONES.
+ *
+ * ISO (YYYY-MM-DD), último día de vigencia inclusive. Se muestra en la
+ * sección y alimenta `priceValidUntil` del Offer en JSON-LD.
+ *
+ * Una sección titulada "Promociones del mes" sin fecha visible es un hueco
+ * de confianza: el visitante no tiene forma de saber si el precio sigue en
+ * pie, y la página puede quedarse rancia sin que nadie lo note.
+ */
+export const PROMOS_VALID_UNTIL = '2026-09-30'
+
+/** Vigencia legible, ya localizada. */
+export const promosValidUntilLabel = (lang: Locale): string => {
+  const formatted = new Intl.DateTimeFormat(lang === 'es' ? 'es-MX' : 'en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${PROMOS_VALID_UNTIL}T12:00:00Z`))
+
+  return lang === 'es' ? `Vigencia: hasta el ${formatted}` : `Valid through ${formatted}`
 }
 
 export const PROMOS_HEADING: Record<Locale, { eyebrow: string; title: string }> = {

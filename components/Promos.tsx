@@ -1,5 +1,5 @@
 import type { Locale } from '@/content/locales'
-import { PROMOS, PROMOS_HEADING } from '@/content/promos'
+import { PROMOS, PROMOS_HEADING, PROMOS_VALID_UNTIL, promosValidUntilLabel } from '@/content/promos'
 import { waLink } from '@/content/site'
 import { ArrowIcon, WhatsAppIcon } from './Icons'
 
@@ -26,6 +26,10 @@ export function Promos({ lang }: { lang: Locale }) {
             {heading.eyebrow}
           </p>
           <h3 className="mt-2 text-h3">{heading.title}</h3>
+          {/* Sin fecha visible, "del mes" no es verificable por el visitante. */}
+          <p className="mt-2 text-[0.8125rem] text-neutral">
+            <time dateTime={PROMOS_VALID_UNTIL}>{promosValidUntilLabel(lang)}</time>
+          </p>
         </div>
         <p aria-hidden className="text-[0.875rem] text-neutral md:hidden">
           {lang === 'es' ? 'Desliza →' : 'Swipe →'}

@@ -47,6 +47,8 @@ type Ui = {
   phoneLabel: string
   emailLabel: string
 
+  /** Aviso de triaje visible junto al CTA, no solo en el pie. */
+  emergencyNotice: string
   footerTagline: string
   footerNav: string
   footerLegal: string
@@ -99,6 +101,14 @@ export const UI: Record<Locale, Ui> = {
     phoneLabel: 'Teléfono',
     emailLabel: 'Correo',
 
+    /**
+     * Triaje visible junto al CTA, no solo en el pie. El sitio vende
+     * "no vayas a urgencias, vamos nosotros": enterrar el aviso al final de
+     * la página deja la única advertencia de seguridad fuera de la vista
+     * justo donde se toma la decisión.
+     */
+    emergencyNotice: 'Si es una emergencia que pone en riesgo la vida, llama al 911.',
+
     footerTagline: 'Tu médico a domicilio en Guadalajara',
     footerNav: 'Navegación',
     footerLegal: 'Aviso importante',
@@ -149,6 +159,8 @@ export const UI: Record<Locale, Ui> = {
     whatsappLabel: 'WhatsApp',
     phoneLabel: 'Phone',
     emailLabel: 'Email',
+
+    emergencyNotice: 'If this is a life-threatening emergency, call 911.',
 
     footerTagline: 'Your doctor at home in Guadalajara',
     footerNav: 'Navigation',

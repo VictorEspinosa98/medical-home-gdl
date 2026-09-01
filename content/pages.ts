@@ -81,7 +81,7 @@ export const PAGES: StaticPage[] = [
     es: {
       path: '/es/nosotros/',
       navLabel: 'Nosotros',
-      metaTitle: 'Nosotros: Misión, Visión y Valores | Medical Home Gdl',
+      metaTitle: 'Nosotros: Médico a Domicilio en Guadalajara | Medical Home',
       metaDescription:
         'Quiénes somos en Medical Home Gdl. Nuestra misión, visión y los seis valores con los que atendemos a cada paciente en su hogar.',
       h1: 'Llevamos la consulta a donde estás',
@@ -90,7 +90,7 @@ export const PAGES: StaticPage[] = [
     en: {
       path: '/en/about/',
       navLabel: 'About us',
-      metaTitle: 'About Us: Mission, Vision and Values | Medical Home Gdl',
+      metaTitle: 'About Us: Doctor at Home in Guadalajara | Medical Home',
       metaDescription:
         'Who we are at Medical Home Gdl. Our mission, vision and the six values behind every visit we make to a patient home.',
       h1: 'We bring the consultation to you',
@@ -138,7 +138,7 @@ export const PAGES: StaticPage[] = [
     en: {
       path: '/en/faq/',
       navLabel: 'FAQ',
-      metaTitle: 'Frequently Asked Questions | Medical Home Gdl',
+      metaTitle: 'FAQ: Doctor at Home in Guadalajara | Medical Home Gdl',
       metaDescription:
         'How long the doctor takes, what the visit includes, whether doctors speak English, night coverage and which areas we serve. Straight answers.',
       h1: 'Frequently asked questions',

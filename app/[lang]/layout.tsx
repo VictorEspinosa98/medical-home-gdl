@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/JsonLd'
 import { HTML_LANG, LOCALES, type Locale, isLocale } from '@/content/locales'
 import { SITE } from '@/content/site'
 import { UI } from '@/content/ui'
-import { medicalBusinessSchema } from '@/lib/jsonld'
+import { medicalBusinessSchema, websiteSchema } from '@/lib/jsonld'
 
 // Self-hosted: next/font descarga en build y sirve desde nuestro dominio.
 // Cero request a Google, cero CLS.
@@ -75,7 +75,7 @@ export default async function LangLayout({
         </a>
         {children}
         <Footer lang={lang} />
-        <JsonLd data={medicalBusinessSchema(lang)} />
+        <JsonLd data={[medicalBusinessSchema(lang), websiteSchema(lang)]} />
       </body>
     </html>
   )

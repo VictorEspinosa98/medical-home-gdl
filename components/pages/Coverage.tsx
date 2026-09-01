@@ -9,7 +9,7 @@ import { FINAL_CTA } from '@/content/home'
 import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
 import { UI } from '@/content/ui'
-import { breadcrumbSchema } from '@/lib/jsonld'
+import { breadcrumbSchema, webPageSchema } from '@/lib/jsonld'
 import { pageRef, urlOf } from '@/lib/urls'
 
 export function Coverage({ lang }: { lang: Locale }) {
@@ -89,10 +89,18 @@ export function Coverage({ lang }: { lang: Locale }) {
 
       <FloatingWhatsApp lang={lang} message={FINAL_CTA[lang].wa} />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
-          { name: p.navLabel, url },
-        ])}
+        data={[
+          webPageSchema({
+            lang,
+            ref: pageRef('coverage'),
+            name: p.h1,
+            description: p.metaDescription,
+          }),
+          breadcrumbSchema([
+            { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
+            { name: p.navLabel, url },
+          ]),
+        ]}
       />
     </>
   )

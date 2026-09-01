@@ -26,14 +26,17 @@ export const absolute = (path: string): string =>
 /**
  * Mapa de hreflang para `alternates.languages` de Next.
  *
- * `x-default` apunta a la raíz, que es la página que negocia idioma en el
- * edge de Netlify — es exactamente el caso de uso que Google documenta
- * para x-default.
+ * `x-default` apunta a la versión ES **de esta misma página**, no a la raíz.
+ *
+ * La raíz es un 302 que negocia idioma en el edge de Netlify: no es
+ * indexable, no tiene <head> propio y obliga a un salto extra. Google pide
+ * que x-default resuelva a una página real, y el mercado primario es
+ * Guadalajara — así que el fallback correcto es el español.
  */
 export const languagesFor = (ref: RouteRef): Record<string, string> => {
   const map: Record<string, string> = {}
   for (const lang of LOCALES) map[HTML_LANG[lang]] = urlOf(lang, ref)
-  map['x-default'] = `${SITE.url}/`
+  map['x-default'] = urlOf('es', ref)
   return map
 }
 

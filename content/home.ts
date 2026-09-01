@@ -39,6 +39,16 @@ export const HERO = {
   },
 } as const
 
+/**
+ * Encabezado del bloque de pilares. Sin él las 4 tarjetas eran <h2>
+ * hermanos sueltos colgando del <h1>, sin nada que dijera de qué van —
+ * mismo bug que ya se había corregido en la portada de Servicios.
+ */
+export const PILLARS_HEADING: Record<Locale, { eyebrow: string; title: string }> = {
+  es: { eyebrow: 'Por qué elegirnos', title: 'Atención médica seria, en tu casa' },
+  en: { eyebrow: 'Why choose us', title: 'Serious medical care, at your home' },
+}
+
 export const PILLARS: Record<Locale, Pillar[]> = {
   es: [
     {

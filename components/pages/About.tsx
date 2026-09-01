@@ -10,7 +10,7 @@ import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
 import { SITE } from '@/content/site'
 import { UI } from '@/content/ui'
-import { breadcrumbSchema } from '@/lib/jsonld'
+import { breadcrumbSchema, webPageSchema } from '@/lib/jsonld'
 import { pageRef, urlOf } from '@/lib/urls'
 
 export function About({ lang }: { lang: Locale }) {
@@ -132,10 +132,18 @@ export function About({ lang }: { lang: Locale }) {
 
       <FloatingWhatsApp lang={lang} message={FINAL_CTA[lang].wa} />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
-          { name: p.navLabel, url },
-        ])}
+        data={[
+          webPageSchema({
+            lang,
+            ref: pageRef('about'),
+            name: p.h1,
+            description: p.metaDescription,
+          }),
+          breadcrumbSchema([
+            { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
+            { name: p.navLabel, url },
+          ]),
+        ]}
       />
     </>
   )

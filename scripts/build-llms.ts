@@ -16,6 +16,7 @@ import { FAQ } from '../content/faq'
 import { HERO } from '../content/home'
 import { HTML_LANG, LOCALES, type Locale } from '../content/locales'
 import { PAGES, page } from '../content/pages'
+import { PROMOS, PROMOS_HEADING, PROMOS_VALID_UNTIL, promosValidUntilLabel } from '../content/promos'
 import { SERVICES_BASE, sortedServices } from '../content/services'
 import { SITE, addressDisplay, allAreaNames } from '../content/site'
 import { mdUrlFor } from '../lib/urls'
@@ -35,6 +36,31 @@ const frontMatter = (fields: Record<string, string>) =>
   )
 
 const bullets = (items: string[]) => items.map((i) => `- ${i}`).join('\n')
+
+/**
+ * Promociones vigentes, con precio.
+ *
+ * El unico precio duro del sitio ("Desde $600") vivia solo en el carrusel
+ * de la portada: no llegaba ni a llms.txt ni a los .md, que es justo donde
+ * un asistente busca el dato que mas se pregunta antes de contratar.
+ */
+const promosBlock = (lang: Locale): string => {
+  const promos = PROMOS[lang]
+  if (promos.length === 0) return ''
+
+  return [
+    `## ${PROMOS_HEADING[lang].title}`,
+    '',
+    `${promosValidUntilLabel(lang)}.`,
+    '',
+    promos
+      .map((promo) => {
+        const detail = [promo.price, promo.note].filter(Boolean).join(' - ')
+        return `- **${promo.title}**${detail ? ` (${detail})` : ''}: ${promo.body}`
+      })
+      .join('\n'),
+  ].join('\n')
+}
 
 const contactBlock = (lang: Locale) =>
   lang === 'es'
@@ -93,6 +119,8 @@ function homeDoc(lang: Locale): string {
           `- [${s[lang].shortName}](${SITE.url}/${lang}/${SERVICES_BASE[lang]}/${s[lang].slug}/): ${s[lang].benefit}`,
       )
       .join('\n'),
+    '',
+    promosBlock(lang),
     '',
     contactBlock(lang),
     '',
@@ -283,6 +311,8 @@ function llmsIndex(): string {
     `- Cobertura / Coverage: ${allAreaNames.join(', ')}`,
     `- Horario / Hours: 24/7, todos los días del año`,
     `- Tiempo de respuesta / Response time: < ${SITE.responseMinutes} min`,
+    `- Precio de referencia / Starting price: primera consulta médica a domicilio desde $600 MXN (first house-call consultation from $600 MXN)`,
+    `- Vigencia de promociones / Offers valid until: ${PROMOS_VALID_UNTIL}`,
     `- Idiomas / Languages: Español, English`,
     `- WhatsApp: https://wa.me/${SITE.whatsapp}`,
     `- Teléfono / Phone: ${SITE.phone}`,

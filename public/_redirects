@@ -27,3 +27,19 @@
 /cobertura/*         /es/cobertura/           301
 /coverage/*          /en/coverage/            301
 /faq/*               /en/faq/                 301
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 404 con marca, en el idioma de la URL.
+#
+# Con output:'export', Next escribe un out/404.html genérico ("404: This page
+# could not be found."), sin cabecera, sin navegación y sin WhatsApp:
+# app/[lang]/not-found.tsx nunca llega a producción. Estas reglas sirven en su
+# lugar la ruta estática /es/404/ o /en/404/, con status 404 REAL — no un
+# soft-404 ni una redirección, así que Google no las indexa.
+#
+# Van al final a propósito: solo capturan lo que ninguna regla anterior y
+# ningún archivo real de out/ resolvió.
+# ─────────────────────────────────────────────────────────────────────────────
+/en/*                /en/404/                 404
+/es/*                /es/404/                 404
+/*                   /es/404/                 404

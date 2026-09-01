@@ -102,13 +102,20 @@ export function CheckList({ items, columns = 2 }: { items: string[]; columns?: 1
  * El contenido está en el HTML aunque esté colapsado, así que Google y los
  * LLMs lo leen igual.
  */
-export function FaqList({ faqs }: { faqs: Faq[] }) {
+export function FaqList({ faqs, headingLevel = 'h3' }: { faqs: Faq[]; headingLevel?: 'h3' | 'h4' }) {
+  // Dentro de un grupo por servicio, las preguntas cuelgan del <h3> del
+  // grupo: si también fueran h3, el esquema de la pagina de FAQ quedaba
+  // plano (67 h3 hermanos) y no habria forma de distinguir grupo de pregunta.
+  const Heading = headingLevel
+
   return (
     <div className="divide-y divide-mist/80 border-y border-mist/80">
       {faqs.map((f) => (
         <details key={f.q} className="group py-5">
           <summary className="flex items-start justify-between gap-4 text-left">
-            <h3 className="text-[1.0625rem] font-semibold text-deep md:text-[1.125rem]">{f.q}</h3>
+            <Heading className="text-[1.0625rem] font-semibold text-deep md:text-[1.125rem]">
+              {f.q}
+            </Heading>
             <span
               aria-hidden
               className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-mist text-brand transition-transform group-open:rotate-45"

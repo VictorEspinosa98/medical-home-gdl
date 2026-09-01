@@ -10,7 +10,7 @@ import { page, pagePath } from '@/content/pages'
 import { SERVICES_BASE, sortedServices } from '@/content/services'
 import { SITE } from '@/content/site'
 import { UI } from '@/content/ui'
-import { breadcrumbSchema, itemListSchema } from '@/lib/jsonld'
+import { breadcrumbSchema, itemListSchema, webPageSchema } from '@/lib/jsonld'
 import { pageRef, urlOf } from '@/lib/urls'
 
 export function ServicesIndex({ lang }: { lang: Locale }) {
@@ -71,6 +71,13 @@ export function ServicesIndex({ lang }: { lang: Locale }) {
       <FloatingWhatsApp lang={lang} message={FINAL_CTA[lang].wa} />
       <JsonLd
         data={[
+          webPageSchema({
+            lang,
+            ref: pageRef('services'),
+            name: p.h1,
+            description: p.metaDescription,
+            medical: true,
+          }),
           breadcrumbSchema([
             { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
             { name: p.navLabel, url },
