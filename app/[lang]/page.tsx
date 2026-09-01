@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { CtaBand, FloatingWhatsApp, WhatsAppCta } from '@/components/Cta'
 import { Header } from '@/components/Header'
-import { ArrowIcon, ClockIcon, PILLAR_ICONS, PhoneIcon, ShieldIcon } from '@/components/Icons'
+import { ArrowIcon, BULLET_ICONS, PILLAR_ICONS, PhoneIcon } from '@/components/Icons'
 import { Img } from '@/components/Img'
 import { JsonLd } from '@/components/JsonLd'
 import { Reveal } from '@/components/Reveal'
@@ -92,20 +92,24 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                 <PhoneIcon className="h-[1.2em] w-[1.2em] shrink-0" />
                 {t.ctaCall}
               </a>
+              <a href={pagePath(lang, 'services')} className="btn glass-dark text-white">
+                {t.ctaServices}
+              </a>
             </div>
 
             <ul
-              className="hero-in mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-white/90"
+              className="hero-in mx-auto mt-9 flex max-w-sm flex-col items-start gap-x-7 gap-y-3 text-white/90 sm:max-w-3xl sm:flex-row sm:flex-wrap sm:justify-center"
               style={{ animationDelay: '240ms' }}
             >
-              <li className="flex items-start gap-2 text-left text-[0.9375rem]">
-                <ClockIcon className="mt-[0.28em] h-[1.15em] w-[1.15em] shrink-0 text-glow" />
-                {t.responseTime}
-              </li>
-              <li className="flex items-start gap-2 text-left text-[0.9375rem]">
-                <ShieldIcon className="mt-[0.28em] h-[1.15em] w-[1.15em] shrink-0 text-glow" />
-                {t.licensedDoctors}
-              </li>
+              {HERO.bullets[lang].map((b) => {
+                const Icon = BULLET_ICONS[b.icon]
+                return (
+                  <li key={b.text} className="flex items-start gap-2 text-left text-[0.9375rem]">
+                    <Icon className="mt-[0.28em] h-[1.15em] w-[1.15em] shrink-0 text-glow" />
+                    {b.text}
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </section>
@@ -115,7 +119,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
           <div className="container-site">
             {/* Bloque extraíble por LLMs, primer contenido tras el hero */}
             <div className="mb-14 max-w-3xl">
-              <AnswerBlock>{HERO.answer[lang]}</AnswerBlock>
+              <AnswerBlock title={HERO.answerTitle[lang]}>{HERO.answer[lang]}</AnswerBlock>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

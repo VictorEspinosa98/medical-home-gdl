@@ -69,7 +69,7 @@ export const UI: Record<Locale, Ui> = {
     ctaWhatsappShort: 'WhatsApp',
     ctaCall: 'Llamar ahora',
     ctaEmail: 'Escribir por correo',
-    ctaServices: 'Ver todos los servicios',
+    ctaServices: 'Ver nuestros servicios',
     ctaServiceDetail: 'Ver detalles',
     ctaBack: 'Volver a servicios',
 
@@ -120,7 +120,7 @@ export const UI: Record<Locale, Ui> = {
     ctaWhatsappShort: 'WhatsApp',
     ctaCall: 'Call now',
     ctaEmail: 'Send an email',
-    ctaServices: 'See all services',
+    ctaServices: 'See our services',
     ctaServiceDetail: 'See details',
     ctaBack: 'Back to services',
 

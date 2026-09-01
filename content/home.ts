@@ -4,14 +4,36 @@ import type { Locale } from './locales'
 
 export type Step = { n: string; title: string; body: string }
 export type Pillar = { icon: 'clock' | 'shield' | 'home' | 'globe'; title: string; body: string }
+export type Bullet = { icon: 'clock' | 'shield' | 'pin' | 'heart' | 'check'; text: string }
 
 export const HERO = {
   badge: { es: 'Disponible 24 horas', en: 'Available 24 hours' },
   /** Bloque extraíble para LLMs: dato duro, autocontenido, primera pantalla. */
-  answer: {
-    es: 'Medical Home Gdl es un servicio de atención médica a domicilio en Guadalajara, Jalisco. Un médico titulado llega a tu casa, hotel o departamento en menos de 1 hora, las 24 horas del día, en Guadalajara, Zapopan, Tlaquepaque, Tonalá, Tlajomulco y Zapotlanejo. También atendemos en Morelia, Michoacán y en Querétaro.',
-    en: 'Medical Home Gdl is a house-call medical service in Guadalajara, Mexico. A licensed doctor reaches your home, hotel or apartment in under 1 hour, 24 hours a day, across Guadalajara, Zapopan, Tlaquepaque, Tonala, Tlajomulco and Zapotlanejo. We also serve Morelia and Queretaro. English-speaking doctors available on request.',
+  answerTitle: {
+    es: 'Atención médica profesional, donde la necesites.',
+    en: 'Professional medical care, wherever you need it.',
   },
+  answer: {
+    es: 'Consultas médicas, laboratorio de análisis clínicos, servicio de enfermería y cuidados a domicilio en Guadalajara y toda la Zona Metropolitana. Atención rápida, personalizada y sin traslados innecesarios.',
+    en: 'Doctor house calls, clinical lab tests, nursing and at-home caregiving in Guadalajara and across its metropolitan area. Fast, personal care with no unnecessary trips.',
+  },
+  /** Viñetas de confianza bajo los botones del banner. */
+  bullets: {
+    es: [
+      { icon: 'clock', text: 'Llegamos hasta ti en menos de 1 hora' },
+      { icon: 'shield', text: 'Atención médica profesional y certificada' },
+      { icon: 'pin', text: 'Amplia cobertura en Guadalajara y Zona Metropolitana' },
+      { icon: 'heart', text: 'Enfermería y cuidadores certificados' },
+      { icon: 'check', text: 'Precios claros y múltiples formas de pago' },
+    ],
+    en: [
+      { icon: 'clock', text: 'We reach you in under 1 hour' },
+      { icon: 'shield', text: 'Professional, certified medical care' },
+      { icon: 'pin', text: 'Wide coverage across Guadalajara and its metro area' },
+      { icon: 'heart', text: 'Certified nurses and caregivers' },
+      { icon: 'check', text: 'Clear prices and several payment methods' },
+    ],
+  } satisfies Record<Locale, Bullet[]>,
   imageAlt: {
     es: 'Médico de Medical Home Gdl explicando un tratamiento a un paciente mayor',
     en: 'Medical Home Gdl doctor explaining a treatment to an older patient',
@@ -22,45 +44,45 @@ export const PILLARS: Record<Locale, Pillar[]> = {
   es: [
     {
       icon: 'clock',
-      title: 'En menos de 1 hora',
-      body: 'Confirmas por WhatsApp y el médico va en camino. Sin sala de espera, sin turno.',
+      title: 'Llegamos en menos de 1 hora',
+      body: 'Atención médica rápida, sin filas ni traslados.',
     },
     {
       icon: 'shield',
-      title: 'Médicos titulados',
-      body: 'Cada visita la hace personal médico con cédula profesional y material estéril de un solo uso.',
+      title: 'Personal médico certificado',
+      body: 'Cada visita se realiza por personal altamente certificado y actualizado.',
     },
     {
       icon: 'home',
       title: 'Todo en tu casa',
-      body: 'Consulta, laboratorio, sueros, curaciones y certificados. No tienes que salir para nada.',
+      body: 'Consultorio médico, laboratorio de análisis clínicos, servicios de enfermería y cuidadores sin salir de casa.',
     },
     {
       icon: 'globe',
       title: 'Las 24 horas',
-      body: 'Madrugada, domingo o día festivo. Siempre hay un médico disponible.',
+      body: 'De día, de noche, de madrugada, domingo o día festivo. Siempre hay un médico disponible.',
     },
   ],
   en: [
     {
       icon: 'clock',
-      title: 'Under one hour',
-      body: 'You confirm on WhatsApp and the doctor is on the way. No waiting room, no queue number.',
+      title: 'We arrive in under 1 hour',
+      body: 'Fast medical care, with no queues and no trips across town.',
     },
     {
       icon: 'shield',
-      title: 'Licensed physicians',
-      body: 'Every visit is made by licensed medical staff using sterile, single-use equipment.',
-    },
-    {
-      icon: 'globe',
-      title: 'English spoken',
-      body: 'Ask for an English-speaking doctor when you book. No Mexican insurance or residency needed.',
+      title: 'Certified medical staff',
+      body: 'Every visit is made by highly certified, up-to-date staff. English-speaking doctors on request.',
     },
     {
       icon: 'home',
-      title: 'Everything at your address',
-      body: 'Consultations, lab work, IV therapy, wound care and certificates. You never leave the room.',
+      title: 'Everything at your home',
+      body: "Doctor's office, clinical lab, nursing and caregivers without leaving the house.",
+    },
+    {
+      icon: 'globe',
+      title: 'Around the clock',
+      body: 'Daytime, night, early morning, Sunday or holiday. There is always a doctor available.',
     },
   ],
 }

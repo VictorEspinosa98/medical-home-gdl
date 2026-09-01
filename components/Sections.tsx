@@ -67,10 +67,19 @@ export function Breadcrumbs({ items }: { items: { name: string; href?: string }[
  * 40-60 palabras autocontenidas que responden la pregunta literal.
  * Es el formato que citan AI Overviews, ChatGPT y Perplexity.
  */
-export function AnswerBlock({ children }: { children: React.ReactNode }) {
+export function AnswerBlock({
+  title,
+  children,
+}: {
+  title?: string
+  children: React.ReactNode
+}) {
   return (
     <div className="card hairline relative border-l-[3px] border-l-brand p-6 md:p-7">
-      <p className="text-[1.0625rem] leading-relaxed text-deep">{children}</p>
+      {title && <p className="text-h3 font-display font-bold text-deep">{title}</p>}
+      <p className={`text-[1.0625rem] leading-relaxed text-deep ${title ? 'mt-3' : ''}`}>
+        {children}
+      </p>
     </div>
   )
 }
