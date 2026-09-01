@@ -130,14 +130,14 @@ export const STEPS: Record<Locale, Step[]> = {
 
 export const ABOUT_TEASER = {
   es: {
-    title: 'Atención médica que se adapta a ti, no al revés',
-    body: 'Medical Home Gdl existe para quitar de en medio lo que estorba entre una persona enferma y un médico: el traslado, la fila y la espera. Trabajamos con seis valores que definen cómo entramos a la casa de un paciente.',
-    cta: 'Conocer nuestra misión y valores',
+    title: 'Atención médica que se adapta a ti',
+    body: 'En Medical Home GDL hacemos que recibir atención profesional sea más fácil. Acercamos nuestros servicios médicos, laboratorio, enfermería y cuidados hasta donde los necesites, evitando traslados y tiempos de espera innecesarios.',
+    cta: 'Conoce más sobre Medical Home',
   },
   en: {
-    title: 'Medical care that adapts to you, not the other way around',
-    body: 'Medical Home Gdl exists to remove what gets between a sick person and a doctor: the drive, the queue and the wait. We work by six values that define how we walk into a patient home.',
-    cta: 'Read our mission and values',
+    title: 'Medical care that adapts to you',
+    body: 'At Medical Home GDL we make professional care easier to get. We bring our medical, lab, nursing and caregiving services to wherever you need them, with no unnecessary trips or waiting times.',
+    cta: 'Learn more about Medical Home',
   },
 } as const
 

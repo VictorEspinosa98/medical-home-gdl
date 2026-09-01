@@ -4,6 +4,7 @@ import { Header } from '@/components/Header'
 import { ArrowIcon, BULLET_ICONS, PILLAR_ICONS, PhoneIcon } from '@/components/Icons'
 import { Img } from '@/components/Img'
 import { JsonLd } from '@/components/JsonLd'
+import { Promos } from '@/components/Promos'
 import { Reveal } from '@/components/Reveal'
 import { AnswerBlock, SectionHead } from '@/components/Sections'
 import { ServiceCard } from '@/components/ServiceCard'
@@ -214,6 +215,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── Promociones ──────────────────────────────────────────────── */}
+        <section className="section">
+          <div className="container-site">
+            <Promos lang={lang} />
           </div>
         </section>
 
