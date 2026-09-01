@@ -18,8 +18,16 @@ const nextConfig: NextConfig = {
     loaderFile: './image-loader.ts',
     // Deben coincidir con WIDTHS de scripts/build-images.mjs. Si no, next
     // genera entradas de srcset duplicadas apuntando al mismo archivo.
-    deviceSizes: [640, 1280, 1920],
+    deviceSizes: [640, 828, 1080, 1280, 1920],
     imageSizes: [256, 384],
+  },
+
+  // La hoja de estilos son 9 KB que bloqueaban el render: en 4G ese ida y
+  // vuelta costaba ~450 ms de FCP. Inline en el <head> lo elimina. El sitio
+  // son 32 paginas estaticas de una sola visita, asi que perder la cache
+  // compartida del .css no cuesta nada.
+  experimental: {
+    inlineCss: true,
   },
 }
 

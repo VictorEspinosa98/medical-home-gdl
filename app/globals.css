@@ -5,15 +5,19 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* Marca. `glow` es SOLO luz: nunca como color de texto (1.9:1, falla AA). */
+  /* Marca. `glow` es SOLO luz: nunca como color de texto (1.9:1, falla AA).
+   * `brand` sí se usa como texto (enlaces, eyebrows, iconos), así que está
+   * calibrado contra el fondo más claro del sitio, `haze`: 5.0:1 pasa AA.
+   * El azul original (#289dd1) daba 2.9:1 sobre haze y reprobaba. */
   --color-glow: #0cbdff;
-  --color-brand: #289dd1;
-  --color-brand-strong: #1f87b7;
+  --color-brand: #17739e;
+  --color-brand-strong: #125c7e;
   --color-deep: #365b6d;
   --color-ink: #1d4355;
   --color-mist: #c9e6f3;
   --color-haze: #f4fafd;
-  --color-neutral: #777777;
+  /* Gris de cuerpo: 4.9:1 sobre haze. #777777 se quedaba en 4.25:1. */
+  --color-neutral: #6d6d6d;
 
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -354,6 +358,25 @@
         color-mix(in oklab, var(--color-ink) 74%, transparent),
         color-mix(in oklab, var(--color-ink) 88%, transparent)
       );
+  }
+
+  /* Numeración de "Cómo funciona". Va en CSS y no en el HTML porque es pura
+   * decoración: el <ol> ya numera para el lector de pantalla, y un 01 en
+   * `mist` sobre blanco da 1.3:1 — como texto real reprobaría contraste. */
+  .steps {
+    counter-reset: step;
+  }
+  .steps > li {
+    counter-increment: step;
+  }
+  .steps > li::before {
+    content: counter(step, decimal-leading-zero);
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-mist);
   }
 
   .skip-link {

@@ -106,8 +106,8 @@ export function About({ lang }: { lang: Locale }) {
 
             <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {VALUES.map((value, i) => (
-                <Reveal key={value.id} delay={(i % 3) * 70}>
-                  <li className="card hairline h-full p-6">
+                <li key={value.id} className="card hairline h-full p-6">
+                  <Reveal delay={(i % 3) * 70}>
                     <span className="font-display text-[0.8125rem] font-bold uppercase tracking-[0.16em] text-brand">
                       {String(i + 1).padStart(2, '0')}
                     </span>
@@ -115,8 +115,8 @@ export function About({ lang }: { lang: Locale }) {
                     <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-neutral">
                       {value.body[lang]}
                     </p>
-                  </li>
-                </Reveal>
+                  </Reveal>
+                </li>
               ))}
             </ul>
           </div>

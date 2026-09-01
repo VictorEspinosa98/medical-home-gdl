@@ -2,7 +2,7 @@ import { CtaBand, FloatingWhatsApp } from '@/components/Cta'
 import { Header } from '@/components/Header'
 import { JsonLd } from '@/components/JsonLd'
 import { Reveal } from '@/components/Reveal'
-import { AnswerBlock, Breadcrumbs } from '@/components/Sections'
+import { AnswerBlock, Breadcrumbs, SectionHead } from '@/components/Sections'
 import { ServiceCard } from '@/components/ServiceCard'
 import { FINAL_CTA } from '@/content/home'
 import type { Locale } from '@/content/locales'
@@ -48,7 +48,9 @@ export function ServicesIndex({ lang }: { lang: Locale }) {
 
         <section className="section">
           <div className="container-site">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Sin este h2 la página saltaba de h1 a los h3 de las tarjetas. */}
+            <SectionHead title={t.sectionServices} />
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((service, i) => (
                 <Reveal key={service.id} delay={(i % 3) * 70}>
                   <ServiceCard service={service} lang={lang} priority={i < 3} />

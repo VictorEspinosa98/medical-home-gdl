@@ -1,14 +1,12 @@
 // Loader custom de next/image para output: 'export'.
 //
-// scripts/build-images.mjs genera, por cada imagen fuente, tres WebP:
-//   /img/<name>.<hash>-640.webp
-//   /img/<name>.<hash>-1280.webp
-//   /img/<name>.<hash>-1920.webp
+// scripts/build-images.mjs genera un WebP por cada ancho de WIDTHS:
+//   /img/<name>.<hash>-<ancho>.webp
 //
 // next/image llama a este loader una vez por entrada del srcset. Aquí solo
 // hay que ajustar el ancho pedido al más cercano disponible hacia arriba.
 
-const WIDTHS = [640, 1280, 1920] as const
+const WIDTHS = [256, 384, 640, 828, 1080, 1280, 1920] as const
 
 export default function imageLoader({
   src,

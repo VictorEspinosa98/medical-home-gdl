@@ -63,7 +63,7 @@ export const UI: Record<Locale, Ui> = {
     openMenu: 'Menú',
     closeMenu: 'Cerrar',
     langSwitch: 'EN',
-    langSwitchLabel: 'Ver esta página en inglés',
+    langSwitchLabel: 'EN — ver esta página en inglés',
 
     ctaWhatsapp: 'Pedir visita por WhatsApp',
     ctaWhatsappShort: 'WhatsApp',
@@ -114,7 +114,7 @@ export const UI: Record<Locale, Ui> = {
     openMenu: 'Menu',
     closeMenu: 'Close',
     langSwitch: 'ES',
-    langSwitchLabel: 'View this page in Spanish',
+    langSwitchLabel: 'ES — view this page in Spanish',
 
     ctaWhatsapp: 'Book on WhatsApp',
     ctaWhatsappShort: 'WhatsApp',

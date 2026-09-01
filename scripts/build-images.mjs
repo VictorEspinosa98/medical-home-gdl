@@ -4,9 +4,7 @@
 // no cambió, no vuelve a procesar nada.
 //
 // Salida por cada imagen:
-//   public/img/<ruta>.<hash>-640.webp
-//   public/img/<ruta>.<hash>-1280.webp
-//   public/img/<ruta>.<hash>-1920.webp
+//   public/img/<ruta>.<hash>-<ancho>.webp   (un archivo por WIDTHS)
 //
 // Y un manifest con el ancho y alto reales de cada una, para que <Img>
 // pueda fijar width/height y el CLS sea 0 sin medir nada en el navegador.
@@ -24,9 +22,15 @@ const OUT = join(ROOT, 'public', 'img')
 const MANIFEST = join(ROOT, 'content', 'image-manifest.json')
 
 // Mismos anchos para todo, logos incluidos. `withoutEnlargement` hace que
-// una fuente de 578px salga a 578px en los tres tamanos: pesa unos KB de mas
+// una fuente de 578px salga a 578px en todos los tamanos: pesa unos KB de mas
 // y elimina la clase entera de bugs de "el loader pidio un ancho que no existe".
-const WIDTHS = [640, 1280, 1920]
+//
+// El salto 640 -> 1280 mandaba al movil una imagen del doble de lo necesario
+// (un movil de 412px a DPR 1.75 pide ~720). 828 y 1080 cierran ese hueco.
+// La lista debe coincidir exactamente con WIDTHS de image-loader.ts y con
+// deviceSizes + imageSizes de next.config.ts, o next genera entradas de
+// srcset duplicadas apuntando al mismo archivo.
+const WIDTHS = [256, 384, 640, 828, 1080, 1280, 1920]
 const WEBP_QUALITY = 80
 
 const BRAND = { glow: '#0cbdff', brand: '#289DD1', ink: '#1D4355' }

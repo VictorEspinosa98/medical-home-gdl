@@ -62,7 +62,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
             bleed
             tint={false}
             priority
-            sizes="100vw"
+            /* La foto va desenfocada a proposito (imgClassName), asi que
+             * media resolucion es indistinguible a simple vista y el LCP
+             * baja a la mitad. De ahi 60vw en vez del 100vw real. */
+            sizes="60vw"
             /* Foto vertical dentro de un banner apaisado: el recorte deja solo
              * una franja, así que un desenfoque suave la convierte en textura
              * (y es el look del banner anterior). scale-105 tapa el borde
@@ -127,7 +130,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-haze text-brand">
                         <Icon className="h-[1.375rem] w-[1.375rem]" />
                       </span>
-                      <h3 className="mt-5 text-h3">{pillar.title}</h3>
+                      <h2 className="mt-5 text-h3">{pillar.title}</h2>
                       <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-neutral">
                         {pillar.body}
                       </p>
@@ -174,17 +177,15 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
           <div className="container-site">
             <SectionHead title={STEPS_HEADING[lang].title} lede={STEPS_HEADING[lang].lede} />
 
-            <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-10">
+            {/* El número de cada paso lo pinta `.steps` con un counter de CSS. */}
+            <ol className="steps mt-12 grid gap-8 md:grid-cols-3 md:gap-10">
               {STEPS[lang].map((step, i) => (
-                <Reveal key={step.n} delay={i * 90}>
-                  <li className="relative">
-                    <span className="font-display text-[3.25rem] font-bold leading-none text-mist">
-                      {step.n}
-                    </span>
+                <li key={step.n} className="relative">
+                  <Reveal delay={i * 90}>
                     <h3 className="mt-3 text-h3">{step.title}</h3>
                     <p className="mt-2.5 text-neutral">{step.body}</p>
-                  </li>
-                </Reveal>
+                  </Reveal>
+                </li>
               ))}
             </ol>
           </div>

@@ -51,9 +51,7 @@ export function Breadcrumbs({ items }: { items: { name: string; href?: string }[
               </span>
             )}
             {i < items.length - 1 && (
-              <span aria-hidden className="text-mist">
-                /
-              </span>
+              <span aria-hidden>/</span>
             )}
           </li>
         ))}
@@ -127,6 +125,30 @@ export function FaqList({ faqs }: { faqs: Faq[] }) {
   )
 }
 
+/** Fila del ContactCard: icono + <dt>/<dd>. La rejilla evita el <div> extra
+ * que rompía el <dl> (solo admite dt, dd o un div que los agrupe). */
+function ContactRow({
+  icon: Icon,
+  label,
+  children,
+  ddClassName = '',
+}: {
+  icon: (props: { className?: string }) => React.ReactElement
+  label: string
+  children: React.ReactNode
+  ddClassName?: string
+}) {
+  return (
+    <div className="grid grid-cols-[auto_1fr] items-start gap-x-3">
+      <Icon className="row-span-2 mt-0.5 h-5 w-5 shrink-0 text-brand" />
+      <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
+        {label}
+      </dt>
+      <dd className={`col-start-2 text-neutral ${ddClassName}`}>{children}</dd>
+    </div>
+  )
+}
+
 /** Tarjeta de contacto. Es el `.glass` #2 de los tres permitidos. */
 export function ContactCard({ lang, message }: { lang: Locale; message: string }) {
   const t = UI[lang]
@@ -136,62 +158,25 @@ export function ContactCard({ lang, message }: { lang: Locale; message: string }
       <p className="mt-3 text-neutral">{t.contactLede}</p>
 
       <dl className="mt-6 space-y-4">
-        <div className="flex items-start gap-3">
-          <ClockIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-          <div>
-            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
-              {t.hours}
-            </dt>
-            <dd className="text-neutral">{t.hoursValue}</dd>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-          <div>
-            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
-              {t.coverageLabel}
-            </dt>
-            <dd className="text-neutral">{allAreaNames.join(' · ')}</dd>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <PhoneIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-          <div>
-            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
-              {t.phoneLabel}
-            </dt>
-            <dd>
-              <a href={telLink()} className="text-neutral transition-colors hover:text-brand">
-                {phoneDisplay}
-              </a>
-            </dd>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <MailIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-          <div>
-            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
-              {t.emailLabel}
-            </dt>
-            <dd>
-              <a
-                href={mailLink()}
-                className="break-all text-[0.9375rem] text-neutral transition-colors hover:text-brand"
-              >
-                {SITE.email}
-              </a>
-            </dd>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <PinIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-          <div>
-            <dt className="text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-deep">
-              {t.addressLabel}
-            </dt>
-            <dd className="text-[0.9375rem] leading-relaxed text-neutral">{addressDisplay}</dd>
-          </div>
-        </div>
+        <ContactRow icon={ClockIcon} label={t.hours}>
+          {t.hoursValue}
+        </ContactRow>
+        <ContactRow icon={PinIcon} label={t.coverageLabel}>
+          {allAreaNames.join(' · ')}
+        </ContactRow>
+        <ContactRow icon={PhoneIcon} label={t.phoneLabel}>
+          <a href={telLink()} className="transition-colors hover:text-brand">
+            {phoneDisplay}
+          </a>
+        </ContactRow>
+        <ContactRow icon={MailIcon} label={t.emailLabel} ddClassName="break-all text-[0.9375rem]">
+          <a href={mailLink()} className="transition-colors hover:text-brand">
+            {SITE.email}
+          </a>
+        </ContactRow>
+        <ContactRow icon={PinIcon} label={t.addressLabel} ddClassName="text-[0.9375rem] leading-relaxed">
+          {addressDisplay}
+        </ContactRow>
       </dl>
 
       <div className="mt-7 flex flex-col gap-3">

@@ -47,8 +47,8 @@ export function Coverage({ lang }: { lang: Locale }) {
 
                 <ul className="mt-8 space-y-4">
                   {AREAS.map((area, i) => (
-                    <Reveal key={area.id} delay={i * 50}>
-                      <li className="card p-6">
+                    <li key={area.id} className="card p-6">
+                      <Reveal delay={i * 50}>
                         <h3 className="flex items-center gap-2.5 text-h3">
                           <PinIcon className="h-5 w-5 shrink-0 text-brand" />
                           {area.name}
@@ -59,8 +59,8 @@ export function Coverage({ lang }: { lang: Locale }) {
                           </span>
                           {area.zones[lang]}
                         </p>
-                      </li>
-                    </Reveal>
+                      </Reveal>
+                    </li>
                   ))}
                 </ul>
 
