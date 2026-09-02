@@ -40,7 +40,7 @@ const bullets = (items: string[]) => items.map((i) => `- ${i}`).join('\n')
 /**
  * Promociones vigentes, con precio.
  *
- * El unico precio duro del sitio ("Desde $600") vivia solo en el carrusel
+ * El unico precio duro del sitio ("Desde $850") vivia solo en el carrusel
  * de la portada: no llegaba ni a llms.txt ni a los .md, que es justo donde
  * un asistente busca el dato que mas se pregunta antes de contratar.
  */
@@ -311,7 +311,7 @@ function llmsIndex(): string {
     `- Cobertura / Coverage: ${allAreaNames.join(', ')}`,
     `- Horario / Hours: 24/7, todos los días del año`,
     `- Tiempo de respuesta / Response time: < ${SITE.responseMinutes} min`,
-    `- Precio de referencia / Starting price: primera consulta médica a domicilio desde $600 MXN (first house-call consultation from $600 MXN)`,
+    `- Precio de referencia / Starting price: primera consulta médica a domicilio desde $850 MXN (first house-call consultation from $850 MXN)`,
     `- Vigencia de promociones / Offers valid until: ${PROMOS_VALID_UNTIL}`,
     `- Idiomas / Languages: Español, English`,
     `- WhatsApp: https://wa.me/${SITE.whatsapp}`,

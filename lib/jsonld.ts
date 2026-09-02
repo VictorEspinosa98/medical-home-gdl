@@ -247,7 +247,7 @@ const leadingPrice = (raw?: string): number | null => {
  * convertirlos en `price` sería inventar una cifra que Google puede acabar
  * mostrando tal cual en el SERP. Devuelve `null` y el llamador lo filtra.
  *
- * "Desde $600" es un mínimo, no un precio cerrado — de ahí `minPrice` y no
+ * "Desde $850" es un mínimo, no un precio cerrado — de ahí `minPrice` y no
  * `price`.
  */
 export function promoOfferSchema(promo: Promo, lang: Locale, url: string) {
