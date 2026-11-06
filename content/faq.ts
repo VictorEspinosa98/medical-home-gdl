@@ -83,7 +83,7 @@ export const FAQ: Record<Locale, Faq[]> = {
     },
     {
       q: 'How much does a house call cost?',
-      a: 'The price depends on the service and the area. Message us on WhatsApp describing what you need and we quote the exact price before booking, with no obligation.',
+      a: 'The first house call starts at $850 MXN in Guadalajara and its metro area. The final price depends on the service and the area: message us on WhatsApp and we quote the exact price before booking, with no obligation.',
     },
     {
       q: 'How do I book a visit?',

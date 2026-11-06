@@ -1,3 +1,4 @@
+import type { RouteRef } from '@/lib/urls'
 import type { Locale } from './locales'
 
 /**
@@ -27,6 +28,8 @@ export type Promo = {
   terms?: string
   /** Mensaje pre-llenado de WhatsApp. */
   wa: string
+  /** Página con el detalle. Si es un servicio, el precio se publica también ahí. */
+  detail?: RouteRef
 }
 
 /**
@@ -58,18 +61,22 @@ export const PROMOS_HEADING: Record<Locale, { eyebrow: string; title: string }> 
   en: { eyebrow: 'Offers', title: 'This month’s offers' },
 }
 
+const service = (id: string): RouteRef => ({ kind: 'service', id })
+
 export const PROMOS: Record<Locale, Promo[]> = {
   es: [
     {
       badge: 'Consulta a domicilio',
+      detail: service('consulta-domicilio'),
       title: 'Primera consulta médica en casa',
       body: 'Valoración completa por médico certificado, sin filas ni traslados. Llegamos en menos de 1 hora.',
-      price: 'Desde $850',
+      price: 'Desde $850 MXN',
       note: 'Guadalajara y Zona Metropolitana',
       wa: 'Hola, quiero información de la promoción de primera consulta médica a domicilio.',
     },
     {
       badge: 'Prueba rápida',
+      detail: service('vsr'),
       title: 'Prueba rápida de VSR 4 en 1',
       body: 'VSR, adenovirus, COVID-19 e influenza. Resultado durante la visita.',
       price: '$950 MXN',
@@ -79,6 +86,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Laboratorio',
+      detail: service('laboratorio'),
       title: 'Check-up completo',
       body: 'Incluye biometría hemática completa, química sanguínea, perfil de lípidos, pruebas de función hepática, examen general de orina y proteína C reactiva (PCR).',
       price: '$1,650 MXN',
@@ -88,6 +96,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Terapia intravenosa',
+      detail: service('sueros'),
       title: 'Sueros IV a domicilio',
       body: 'Un médico acude a tu domicilio y realiza una valoración previa para determinar si la terapia intravenosa está indicada.',
       priceBefore: 'Antes $2,500 MXN',
@@ -109,6 +118,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Prenupcial',
+      detail: service('prenupcial'),
       title: 'Paquete prenupcial para la pareja',
       body: 'Incluye un certificado médico prenupcial por persona para el trámite de matrimonio civil, además de pruebas de VIH, VDRL, grupo sanguíneo y factor Rh para ambos integrantes.',
       price: '$2,950 MXN',
@@ -118,6 +128,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Especialidad',
+      detail: service('medicina-interna'),
       title: 'Medicina interna',
       body: 'En Medical Home GDL ya contamos con especialista en Medicina Interna. Puedes agendar una consulta con un médico especialista en consultorio o solicitar atención a domicilio en Guadalajara y la Zona Metropolitana, según disponibilidad.',
       note: 'El servicio incluye valoración de síntomas, revisión de estudios y seguimiento de enfermedades crónicas.',
@@ -126,6 +137,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Para empresas',
+      detail: { kind: 'page', id: 'business' },
       title: 'Servicios médicos para tu personal',
       body: 'Evaluaciones médicas para candidatos en proceso de selección y personal de nuevo ingreso, certificados médicos y toma de muestras de laboratorio en tus instalaciones.',
       note: 'Cotización según el número de trabajadores y los servicios requeridos. Disponible en Guadalajara y la ZMG.',
@@ -134,6 +146,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Consulta médica virtual',
+      detail: service('consulta-en-linea'),
       title: 'Consulta médica en línea',
       body: 'Habla con un médico de Medical Home GDL sobre tus síntomas, revisa tus estudios o da seguimiento a tu tratamiento por videollamada. Atención en todo México y receta digital cuando se indique.',
       priceBefore: 'Antes $650 MXN',
@@ -146,6 +159,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
   en: [
     {
       badge: 'House call',
+      detail: service('consulta-domicilio'),
       title: 'First doctor visit at home',
       body: 'Full assessment by a certified doctor, no queues and no travel. We arrive in under an hour.',
       price: 'From $850 MXN',
@@ -154,6 +168,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Rapid test',
+      detail: service('vsr'),
       title: '4-in-1 RSV rapid test',
       body: 'RSV, adenovirus, COVID-19 and influenza. Result during the visit.',
       price: '$950 MXN',
@@ -163,6 +178,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Lab',
+      detail: service('laboratorio'),
       title: 'Complete check-up',
       body: 'Includes complete blood count, blood chemistry, lipid panel, liver function tests, urinalysis and C-reactive protein (CRP).',
       price: '$1,650 MXN',
@@ -172,6 +188,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'IV therapy',
+      detail: service('sueros'),
       title: 'IV drips at home',
       body: 'A doctor comes to your home and performs an assessment first to determine whether IV therapy is appropriate.',
       priceBefore: 'Was $2,500 MXN',
@@ -192,6 +209,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Premarital',
+      detail: service('prenupcial'),
       title: 'Premarital package for couples',
       body: 'Includes one premarital medical certificate per person for the civil marriage process, plus HIV, VDRL, blood type and Rh factor tests for both partners.',
       price: '$2,950 MXN',
@@ -201,6 +219,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Specialty care',
+      detail: service('medicina-interna'),
       title: 'Internal medicine',
       body: 'Medical Home GDL now has an internal medicine specialist. You can book a visit with a specialist at our clinic or request care at home in Guadalajara and its metro area, subject to availability.',
       note: 'The service includes symptom assessment, review of test results and follow-up of chronic conditions.',
@@ -209,6 +228,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'For companies',
+      detail: { kind: 'page', id: 'business' },
       title: 'Medical services for your staff',
       body: 'Medical evaluations for job candidates and new hires, medical certificates and lab sample collection at your facilities.',
       note: 'Quote based on the number of employees and services required. Available in Guadalajara and its metro area.',
@@ -217,6 +237,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
     {
       badge: 'Virtual consultation',
+      detail: service('consulta-en-linea'),
       title: 'Online doctor consultation',
       body: 'Talk to a Medical Home GDL doctor about your symptoms, review your test results or follow up on your treatment by video call. Care anywhere in Mexico, with a digital prescription when indicated.',
       priceBefore: 'Was $650 MXN',
@@ -227,3 +248,7 @@ export const PROMOS: Record<Locale, Promo[]> = {
     },
   ],
 }
+
+/** Promoción ligada a un servicio. Es de donde su página toma el precio. */
+export const promoForService = (lang: Locale, id: string): Promo | undefined =>
+  PROMOS[lang].find((p) => p.detail?.kind === 'service' && p.detail.id === id)

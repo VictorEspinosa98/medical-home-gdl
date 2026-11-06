@@ -7,6 +7,7 @@ import { AnswerBlock, Breadcrumbs, SectionHead } from '@/components/Sections'
 import { BUSINESS } from '@/content/business'
 import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
+import { servicePath } from '@/content/services'
 import { UI } from '@/content/ui'
 import { breadcrumbSchema, businessServiceSchema, jsonLdImage, webPageSchema } from '@/lib/jsonld'
 import { pageRef, urlOf } from '@/lib/urls'
@@ -69,6 +70,14 @@ export function Business({ lang }: { lang: Locale }) {
                     <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-neutral">
                       {service.body}
                     </p>
+                    {service.serviceId && (
+                      <a
+                        href={servicePath(lang, service.serviceId)}
+                        className="mt-3 inline-block py-1 text-[0.9375rem] font-semibold text-brand transition-colors hover:text-brand-strong"
+                      >
+                        {lang === 'es' ? 'Ver el servicio' : 'See the service'}
+                      </a>
+                    )}
                   </Reveal>
                 </li>
               ))}
@@ -118,11 +127,13 @@ export function Business({ lang }: { lang: Locale }) {
             name: p.h1,
             description: p.metaDescription,
             image: jsonLdImage(IMAGE, 1280),
+            mainEntityId: `${url}#service`,
+            breadcrumbId: `${url}#breadcrumb`,
           }),
           breadcrumbSchema([
             { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
             { name: p.navLabel, url },
-          ]),
+          ], `${url}#breadcrumb`),
         ]}
       />
     </>

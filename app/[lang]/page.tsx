@@ -17,7 +17,7 @@ import { sortedServices } from '@/content/services'
 import { PROMOS } from '@/content/promos'
 import { telLink } from '@/content/site'
 import { UI } from '@/content/ui'
-import { faqPageSchema, jsonLdImage, promoOfferSchema, webPageSchema } from '@/lib/jsonld'
+import { faqPageSchema, homeOfferSchema, jsonLdImage, webPageSchema } from '@/lib/jsonld'
 import { buildMetadata } from '@/lib/metadata'
 import { pageRef, urlOf } from '@/lib/urls'
 
@@ -318,7 +318,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
           faqPageSchema(topFaqs, homeUrl),
           // Solo las promos con un precio numérico real emiten Offer.
           ...PROMOS[lang]
-            .map((promo) => promoOfferSchema(promo, lang, homeUrl))
+            .map((promo) => homeOfferSchema(promo, lang, homeUrl))
             .filter((offer) => offer !== null),
         ]}
       />

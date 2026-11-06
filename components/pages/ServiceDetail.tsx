@@ -16,7 +16,7 @@ import {
 import { ServiceCard } from '@/components/ServiceCard'
 import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
-import { promosValidUntilLabel } from '@/content/promos'
+import { promoForService, promosValidUntilLabel } from '@/content/promos'
 import { relatedServices, type Service } from '@/content/services'
 import { UI } from '@/content/ui'
 import { breadcrumbSchema, faqPageSchema, jsonLdImage, serviceSchema, webPageSchema } from '@/lib/jsonld'
@@ -29,6 +29,7 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
   const servicesPage = page('services')[lang]
 
   const related = relatedServices(service.id)
+  const promo = promoForService(lang, service.id)
 
   return (
     <>
@@ -52,11 +53,15 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
                 <h1 className="text-h1">{s.name}</h1>
                 <p className="mt-5 text-[1.125rem] leading-relaxed text-neutral">{s.benefit}</p>
 
-                {s.heroPrice && (
-                  <>
-                    <p className="mt-5 text-[1.375rem] font-display font-bold text-brand">{s.heroPrice}</p>
+                {promo?.price && (
+                  <div className="mt-5">
+                    <p className="text-[0.9375rem] font-semibold text-deep">{promo.title}</p>
+                    {promo.priceBefore && (
+                      <p className="mt-1 text-[0.9375rem] text-neutral line-through">{promo.priceBefore}</p>
+                    )}
+                    <p className="mt-0.5 text-[1.375rem] font-display font-bold text-brand">{promo.price}</p>
                     <p className="mt-1 text-[0.8125rem] text-neutral">{promosValidUntilLabel(lang)}</p>
-                  </>
+                  </div>
                 )}
                 {s.heroCta && (
                   <div className="mt-6">
@@ -207,7 +212,7 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
       <FloatingWhatsApp lang={lang} message={s.waMessage} />
       <JsonLd
         data={[
-          serviceSchema(service, lang, url),
+          ...serviceSchema(service, lang, url, promo),
           webPageSchema({
             lang,
             ref: serviceRef(service.id),
@@ -215,13 +220,16 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
             description: s.metaDescription,
             image: jsonLdImage(service.image, 1280),
             medical: true,
+            mainEntityId: `${url}#service`,
+            aboutIds: service.schemaType === 'Service' ? [] : [`${url}#medical`],
+            breadcrumbId: `${url}#breadcrumb`,
           }),
           faqPageSchema(s.faq, url),
           breadcrumbSchema([
             { name: t.breadcrumbHome, url: urlOf(lang, pageRef('home')) },
             { name: servicesPage.navLabel, url: urlOf(lang, pageRef('services')) },
             { name: s.shortName, url },
-          ]),
+          ], `${url}#breadcrumb`),
         ]}
       />
     </>

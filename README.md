@@ -8,7 +8,7 @@ Sitio corporativo bilingüe (ES/EN) para servicios médicos a domicilio en la Zo
 
 ## Datos de contacto
 
-Viven en **un solo archivo**, `content/site.ts`. Cambiar un valor ahí se propaga solo a: botón flotante de WhatsApp, los CTAs de cada sección, el footer, la página de contacto, el JSON-LD `MedicalBusiness`, `llms.txt` y los 32 archivos Markdown. **No hay ningún otro lugar donde estén escritos.**
+Viven en **un solo archivo**, `content/site.ts`. Cambiar un valor ahí se propaga solo a: botón flotante de WhatsApp, los CTAs de cada sección, el footer, la página de contacto, el JSON-LD `MedicalBusiness`, `llms.txt` y los archivos Markdown. **No hay ningún otro lugar donde estén escritos.**
 
 | Dato | Valor |
 |---|---|
@@ -134,7 +134,7 @@ Después del primer deploy con HTTPS funcionando en apex y www, descomenta el he
 
 Generada por `scripts/build-llms.ts` desde el mismo `content/` que renderiza el HTML, así que no se puede desincronizar:
 
-- `/llms.txt` — índice en formato [llmstxt.org](https://llmstxt.org) con los datos duros y las 32 URLs
+- `/llms.txt` — índice en formato [llmstxt.org](https://llmstxt.org) con los datos duros y todas las URLs
 - `/llms-full.txt` — todo el sitio en Markdown, en ambos idiomas, en un solo request
 - `/es/servicios/<slug>.md` — gemelo Markdown de cada página, anunciado en el `<head>` con `<link rel="alternate" type="text/markdown">`
 

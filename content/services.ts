@@ -28,8 +28,6 @@ export type ServiceLocale = {
   faq: { q: string; a: string }[]
   /** Texto pre-llenado del WhatsApp de esta página. */
   waMessage: string
-  /** Precio junto al botón de portada, con la vigencia de PROMOS_VALID_UNTIL. */
-  heroPrice?: string
   /** Si existe, la portada muestra un botón de WhatsApp con este texto. */
   heroCta?: string
   /** Secciones propias entre la introducción y "Qué incluye". */
@@ -1296,7 +1294,6 @@ export const SERVICES: Service[] = [
       ],
       waMessage:
         'Hola, me interesa la prueba respiratoria 4 en 1 (VSR, adenovirus, COVID e influenza). ¿Me pueden compartir disponibilidad a domicilio o en consultorio?',
-      heroPrice: '$950 MXN',
       heroCta: 'Agendar prueba por WhatsApp',
     },
     en: {
@@ -1353,7 +1350,6 @@ export const SERVICES: Service[] = [
       ],
       waMessage:
         'Hi, I am interested in the 4-in-1 respiratory test (RSV, adenovirus, COVID and influenza). Could you share availability at home or at the clinic?',
-      heroPrice: '$950 MXN',
       heroCta: 'Book the test on WhatsApp',
     },
   },
@@ -1544,7 +1540,6 @@ export const SERVICES: Service[] = [
       ],
       waMessage:
         'Hola, me gustaría agendar una consulta médica virtual. ¿Me pueden compartir los horarios disponibles y las indicaciones para poder agendar?',
-      heroPrice: 'Antes $650 MXN · Ahora $450 MXN',
       heroCta: 'Agenda tu consulta médica en línea por WhatsApp',
       contactLede:
         'Escríbenos por WhatsApp. Te compartimos los horarios disponibles y las indicaciones para conectarte a la videollamada.',
@@ -1605,7 +1600,6 @@ export const SERVICES: Service[] = [
       ],
       waMessage:
         'Hi, I would like to book a virtual medical consultation. Could you share the available times and instructions for booking?',
-      heroPrice: 'Was $650 MXN · Now $450 MXN',
       heroCta: 'Book your online consultation on WhatsApp',
       contactLede:
         'Message us on WhatsApp. We share the available times and the instructions for joining the video call.',

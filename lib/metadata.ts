@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { HTML_LANG, type Locale } from '@/content/locales'
+import type { Locale } from '@/content/locales'
 import { SITE } from '@/content/site'
 import { absolute, languagesFor, mdUrlFor, pathOf, type RouteRef, urlOf } from './urls'
 
 /**
- * Constructor único de metadata para las 34 páginas.
+ * Constructor único de metadata de todas las páginas.
  * Centralizarlo es lo que garantiza que ninguna se quede sin canonical
  * o sin hreflang recíproco.
  */
@@ -39,11 +39,17 @@ export function buildMetadata({
     openGraph: {
       type: 'website',
       siteName: SITE.name,
-      locale: HTML_LANG[lang].replace('-', '_'),
+      locale: lang === 'en' ? 'en_US' : 'es_MX',
+      alternateLocale: lang === 'en' ? 'es_MX' : 'en_US',
       url,
       title,
       description,
-      images: [{ url: absolute(ogImage), width: 1200, height: 630, alt: SITE.name }],
+      // Solo la tarjeta OG por defecto mide 1200x630; las fotos de servicio no.
+      images: [
+        image
+          ? { url: absolute(ogImage), alt: title }
+          : { url: absolute(ogImage), width: 1200, height: 630, alt: SITE.name },
+      ],
     },
     twitter: {
       card: 'summary_large_image',

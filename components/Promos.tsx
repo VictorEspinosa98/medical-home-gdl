@@ -1,6 +1,7 @@
 import type { Locale } from '@/content/locales'
 import { PROMOS, PROMOS_HEADING, PROMOS_VALID_UNTIL, promosValidUntilLabel } from '@/content/promos'
 import { waLink } from '@/content/site'
+import { pathOf } from '@/lib/urls'
 import { ArrowIcon, WhatsAppIcon } from './Icons'
 
 /**
@@ -44,12 +45,9 @@ export function Promos({ lang }: { lang: Locale }) {
       >
         {promos.map((promo) => (
           <li key={promo.title} className="w-[82%] shrink-0 snap-start sm:w-[21rem] md:w-auto">
-            <a
-              href={waLink(promo.wa)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card card-link group flex h-full flex-col p-6"
-            >
+            {/* El enlace de WhatsApp cubre toda la tarjeta con `after:`, y así
+              * "Ver detalles" puede ser un enlace real sin anidar <a> en <a>. */}
+            <div className="card card-link group relative flex h-full flex-col p-6">
               <span className="inline-flex w-fit items-center rounded-full bg-mist/60 px-3 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-deep">
                 {promo.badge}
               </span>
@@ -71,13 +69,27 @@ export function Promos({ lang }: { lang: Locale }) {
               )}
               {promo.note && <p className="mt-1 text-[0.8125rem] text-neutral">{promo.note}</p>}
 
-              <span className="mt-auto flex items-center gap-2 pt-6 text-[0.9375rem] font-semibold text-brand transition-colors group-hover:text-brand-strong">
+              <a
+                href={waLink(promo.wa)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto flex items-center gap-2 pt-6 text-[0.9375rem] font-semibold text-brand transition-colors after:absolute after:inset-0 after:rounded-[inherit] group-hover:text-brand-strong"
+              >
                 <WhatsAppIcon className="h-[1.15em] w-[1.15em] shrink-0" />
                 {promo.cta ?? (lang === 'es' ? 'Pedir por WhatsApp' : 'Ask on WhatsApp')}
                 <ArrowIcon className="h-4 w-4 shrink-0" />
-              </span>
+              </a>
+              {promo.detail && (
+                <a
+                  href={pathOf(lang, promo.detail)}
+                  className="relative z-10 mt-2 w-fit py-1 text-[0.875rem] text-neutral underline underline-offset-2 transition-colors hover:text-brand"
+                >
+                  {lang === 'es' ? 'Ver detalles' : 'See details'}
+                  <span className="sr-only">: {promo.title}</span>
+                </a>
+              )}
               {promo.terms && <p className="mt-3 text-[0.75rem] text-neutral">{promo.terms}</p>}
-            </a>
+            </div>
           </li>
         ))}
       </ul>

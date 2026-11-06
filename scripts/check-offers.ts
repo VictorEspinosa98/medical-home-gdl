@@ -9,7 +9,7 @@ import { promoOfferSchema } from '../lib/jsonld'
 const offerFor = (title: string) => {
   const promo = PROMOS.es.find((p) => p.title === title)
   assert.ok(promo, `Promo no encontrada: ${title}`)
-  return promoOfferSchema(promo, 'es', 'https://example.com') as Record<string, unknown> | null
+  return promoOfferSchema(promo, 'https://example.com') as Record<string, unknown> | null
 }
 
 assert.equal(offerFor('Sueros IV a domicilio')?.price, 2200)

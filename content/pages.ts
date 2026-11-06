@@ -81,7 +81,7 @@ export const PAGES: StaticPage[] = [
     es: {
       path: '/es/servicios-medicos-para-empresas-guadalajara/',
       navLabel: 'Empresas',
-      metaTitle: 'Servicios Médicos para Empresas en Guadalajara | Medical Home',
+      metaTitle: 'Servicios Médicos para Empresas, Guadalajara | Medical Home',
       metaDescription:
         'Valoraciones médicas de ingreso, certificados para trabajadores y toma de muestras de laboratorio en tus instalaciones en Guadalajara y la Zona Metropolitana.',
       h1: 'Medical Home GDL para empresas',
@@ -90,7 +90,7 @@ export const PAGES: StaticPage[] = [
     en: {
       path: '/en/medical-services-for-companies-guadalajara/',
       navLabel: 'Companies',
-      metaTitle: 'Medical Services for Companies in Guadalajara | Medical Home',
+      metaTitle: 'Medical Services for Companies, Guadalajara | Medical Home',
       metaDescription:
         'Pre-employment medical assessments, worker certificates and lab sample collection at your facilities in Guadalajara and its metro area.',
       h1: 'Medical Home GDL for companies',

@@ -6,7 +6,7 @@ type BusinessCopy = {
   wa: string
   imageAlt: string
   servicesTitle: string
-  services: { title: string; body: string }[]
+  services: { title: string; body: string; serviceId?: string }[]
   stepsTitle: string
   steps: { title: string; body: string }[]
   closingTitle: string
@@ -34,10 +34,12 @@ export const BUSINESS: Record<Locale, BusinessCopy> = {
       },
       {
         title: 'Certificados médicos para trabajadores',
+        serviceId: 'certificados',
         body: 'Realizamos la valoración clínica y, cuando corresponde, emitimos el certificado médico con base en los hallazgos y el propósito para el que se solicita. Podemos coordinar citas individuales o programar varias valoraciones en una misma jornada.',
       },
       {
         title: 'Estudios de laboratorio en tu empresa',
+        serviceId: 'laboratorio',
         body: 'Nuestro equipo puede acudir a tus instalaciones para realizar la toma de muestras del personal. Coordinamos los estudios solicitados, las indicaciones de preparación y la entrega de resultados. Según el servicio requerido, también podemos incluir pruebas antidoping y estudios microbiológicos en la cotización.',
       },
       {
@@ -85,10 +87,12 @@ export const BUSINESS: Record<Locale, BusinessCopy> = {
       },
       {
         title: 'Medical certificates for workers',
+        serviceId: 'certificados',
         body: 'We perform the clinical assessment and, when appropriate, issue the medical certificate based on the findings and the purpose for which it is requested. We can arrange individual appointments or schedule several assessments on the same day.',
       },
       {
         title: 'Lab tests at your company',
+        serviceId: 'laboratorio',
         body: 'Our team can come to your facilities to collect samples from your staff. We coordinate the requested tests, preparation instructions and delivery of results. Depending on the service required, we can also include drug screening and microbiological tests in the quote.',
       },
       {

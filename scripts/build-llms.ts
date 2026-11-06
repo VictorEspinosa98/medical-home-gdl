@@ -2,7 +2,7 @@
 //
 //   out/llms.txt         índice en formato llmstxt.org
 //   out/llms-full.txt    todo el contenido del sitio en Markdown plano
-//   out/<ruta>.md        versión Markdown de cada una de las 34 páginas
+//   out/<ruta>.md        versión Markdown de cada página
 //
 // Todo se deriva de content/, la misma fuente que renderiza el HTML.
 // No hay forma de que el Markdown y las páginas se desincronicen.
@@ -17,9 +17,16 @@ import { FAQ } from '../content/faq'
 import { HERO } from '../content/home'
 import { HTML_LANG, LOCALES, type Locale } from '../content/locales'
 import { PAGES, page } from '../content/pages'
-import { PROMOS, PROMOS_HEADING, PROMOS_VALID_UNTIL, promosValidUntilLabel } from '../content/promos'
+import {
+  PROMOS,
+  PROMOS_HEADING,
+  PROMOS_VALID_UNTIL,
+  promoForService,
+  promosValidUntilLabel,
+} from '../content/promos'
 import { SERVICES_BASE, sortedServices } from '../content/services'
 import { SITE, addressDisplay, allAreaNames } from '../content/site'
+import { UI } from '../content/ui'
 import { mdUrlFor } from '../lib/urls'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -65,7 +72,28 @@ const promosBlock = (lang: Locale): string => {
   ].join('\n')
 }
 
+/** Tabla de precios publicados. Solo promociones con cifra, sin datos nuevos. */
+const pricesTable = (lang: Locale): string => {
+  const L = lang === 'es'
+  const rows = PROMOS[lang]
+    .filter((promo) => promo.price)
+    .map((promo) => `| ${promo.title} | ${promo.price} | ${promo.priceBefore ?? '-'} |`)
+
+  return [
+    `## ${L ? 'Precios publicados' : 'Published prices'}`,
+    '',
+    `${promosValidUntilLabel(lang)}.`,
+    '',
+    L ? '| Servicio | Precio | Precio anterior |' : '| Service | Price | Previous price |',
+    '|---|---|---|',
+    ...rows,
+  ].join('\n')
+}
+
 const contactBlock = (lang: Locale) =>
+  `${contactLines(lang)}\n\n> ${UI[lang].footerDisclaimer}`
+
+const contactLines = (lang: Locale) =>
   lang === 'es'
     ? [
         '## Contacto',
@@ -157,6 +185,8 @@ function servicesIndexDoc(lang: Locale): string {
       )
       .join('\n\n'),
     '',
+    pricesTable(lang),
+    '',
     contactBlock(lang),
     '',
   ].join('\n')
@@ -167,6 +197,7 @@ function serviceDoc(serviceId: string, lang: Locale): string {
   const s = service[lang]
   const url = `${SITE.url}/${lang}/${SERVICES_BASE[lang]}/${s.slug}/`
   const L = lang === 'es'
+  const promo = promoForService(lang, serviceId)
 
   return [
     frontMatter({
@@ -182,7 +213,14 @@ function serviceDoc(serviceId: string, lang: Locale): string {
     '',
     s.intro,
     '',
-    ...(s.heroPrice ? [`**${L ? 'Precio' : 'Price'}:** ${s.heroPrice}. ${promosValidUntilLabel(lang)}.`, ''] : []),
+    ...(promo?.price
+      ? [
+          `**${L ? 'Precio' : 'Price'} (${promo.title}):** ${[promo.priceBefore, promo.price]
+            .filter(Boolean)
+            .join(' · ')}. ${promosValidUntilLabel(lang)}.`,
+          '',
+        ]
+      : []),
     ...(s.sections ?? []).flatMap((section) => [`## ${section.title}`, '', section.body, '']),
     ...(s.urgentNote ? [`> **${L ? 'Importante' : 'Important'}:** ${s.urgentNote}`, ''] : []),
     `## ${L ? 'Qué incluye' : 'What it includes'}`,
@@ -377,7 +415,7 @@ function llmsIndex(): string {
       const path = `/${lang}/${SERVICES_BASE[lang]}/${s[lang].slug}/`
       lines.push(`- [${s[lang].name}](${SITE.url}${mdUrlFor(path)}): ${s[lang].benefit}`)
     }
-    lines.push('')
+    lines.push('', pricesTable(lang), '')
   }
 
   lines.push(
