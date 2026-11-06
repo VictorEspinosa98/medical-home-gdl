@@ -7,6 +7,7 @@
     "build": "node scripts/build-images.mjs && next build && tsx scripts/build-llms.ts",
     "build:images": "node scripts/build-images.mjs",
     "build:llms": "tsx scripts/build-llms.ts",
+    "check:offers": "tsx scripts/check-offers.ts",
     "serve": "pnpm dlx serve out -l 3000",
     "typecheck": "tsc --noEmit",
     "lint": "eslint"

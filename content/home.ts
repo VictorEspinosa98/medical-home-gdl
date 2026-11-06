@@ -45,8 +45,8 @@ export const HERO = {
  * mismo bug que ya se había corregido en la portada de Servicios.
  */
 export const PILLARS_HEADING: Record<Locale, { eyebrow: string; title: string }> = {
-  es: { eyebrow: 'Por qué elegirnos', title: 'Atención médica seria, en tu casa' },
-  en: { eyebrow: 'Why choose us', title: 'Serious medical care, at your home' },
+  es: { eyebrow: 'Por qué elegirnos', title: 'Atención médica a domicilio' },
+  en: { eyebrow: 'Why choose us', title: 'At-home medical care' },
 }
 
 export const PILLARS: Record<Locale, Pillar[]> = {

@@ -1,4 +1,4 @@
-import { CtaBand, FloatingWhatsApp } from '@/components/Cta'
+import { CtaBand, FloatingWhatsApp, WhatsAppCta } from '@/components/Cta'
 import { Header } from '@/components/Header'
 import { ClockIcon } from '@/components/Icons'
 import { Img } from '@/components/Img'
@@ -16,6 +16,7 @@ import {
 import { ServiceCard } from '@/components/ServiceCard'
 import type { Locale } from '@/content/locales'
 import { page, pagePath } from '@/content/pages'
+import { promosValidUntilLabel } from '@/content/promos'
 import { relatedServices, type Service } from '@/content/services'
 import { UI } from '@/content/ui'
 import { breadcrumbSchema, faqPageSchema, jsonLdImage, serviceSchema, webPageSchema } from '@/lib/jsonld'
@@ -51,11 +52,25 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
                 <h1 className="text-h1">{s.name}</h1>
                 <p className="mt-5 text-[1.125rem] leading-relaxed text-neutral">{s.benefit}</p>
 
+                {s.heroPrice && (
+                  <>
+                    <p className="mt-5 text-[1.375rem] font-display font-bold text-brand">{s.heroPrice}</p>
+                    <p className="mt-1 text-[0.8125rem] text-neutral">{promosValidUntilLabel(lang)}</p>
+                  </>
+                )}
+                {s.heroCta && (
+                  <div className="mt-6">
+                    <WhatsAppCta lang={lang} message={s.waMessage} label={s.heroCta} />
+                  </div>
+                )}
+
                 <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
-                  <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
-                    <ClockIcon className="h-[1.15em] w-[1.15em] text-brand" />
-                    {t.responseTime}
-                  </li>
+                  {!service.online && (
+                    <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
+                      <ClockIcon className="h-[1.15em] w-[1.15em] text-brand" />
+                      {t.responseTime}
+                    </li>
+                  )}
                   <li className="flex items-center gap-2 text-[0.9375rem] text-deep">
                     <span className="pulse-dot ml-0.5 mr-0.5" aria-hidden />
                     {t.available247}
@@ -92,6 +107,26 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
                   ))}
                 </div>
 
+                {s.sections?.map((section) => (
+                  <div key={section.title} className="mt-14">
+                    <SectionHead title={section.title} />
+                    <div className="prose-mh measure mt-7">
+                      {section.body.split('\n\n').map((para) => (
+                        <p key={para.slice(0, 40)}>{para}</p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
+                {s.urgentNote && (
+                  <p
+                    role="note"
+                    className="measure mt-8 rounded-xl border-l-[3px] border-l-red-600 bg-red-50 p-5 font-semibold text-deep"
+                  >
+                    {s.urgentNote}
+                  </p>
+                )}
+
                 <div className="mt-14">
                   <SectionHead title={t.sectionIncludes} />
                   <div className="mt-7">
@@ -120,7 +155,12 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
 
               <aside className="lg:col-span-4 lg:col-start-9">
                 <div className="lg:sticky lg:top-[96px]">
-                  <ContactCard lang={lang} message={s.waMessage} />
+                  <ContactCard
+                    lang={lang}
+                    message={s.waMessage}
+                    lede={s.contactLede}
+                    coverage={s.coverageNote}
+                  />
                 </div>
               </aside>
             </div>
@@ -157,8 +197,10 @@ export function ServiceDetail({ service, lang }: { service: Service; lang: Local
               ? '¿Necesitas este servicio hoy?'
               : 'Do you need this service today?'
           }
-          body={UI[lang].contactLede}
+          body={s.contactLede ?? UI[lang].contactLede}
           message={s.waMessage}
+          coverage={s.coverageNote}
+          ctaLabel={s.heroCta}
         />
       </main>
 

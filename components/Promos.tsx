@@ -4,9 +4,9 @@ import { waLink } from '@/content/site'
 import { ArrowIcon, WhatsAppIcon } from './Icons'
 
 /**
- * Carrusel de promociones. Deslizable con el dedo en móvil y con
- * trackpad/rueda en escritorio, usando scroll-snap nativo: cero JavaScript,
- * cero librerías, y funciona igual con el teclado (Tab lleva a cada tarjeta).
+ * Promociones. Deslizables con el dedo en móvil con scroll-snap nativo y en
+ * cuadrícula desde `md`: cero JavaScript, cero librerías, y funciona igual
+ * con el teclado (Tab lleva a cada tarjeta).
  *
  * Cada tarjeta abre WhatsApp con el mensaje de esa promoción ya escrito.
  * El contenido vive en content/promos.ts; si el array está vacío, la
@@ -39,11 +39,11 @@ export function Promos({ lang }: { lang: Locale }) {
       {/* -mx-5/px-5 replican el padding de .container-site para que las
         * tarjetas lleguen al borde de la pantalla al deslizar. */}
       <ul
-        className="-mx-5 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:-mx-8 md:px-8 [&::-webkit-scrollbar]:hidden"
+        className="-mx-5 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden"
         aria-label={heading.title}
       >
         {promos.map((promo) => (
-          <li key={promo.title} className="w-[82%] shrink-0 snap-start sm:w-[21rem]">
+          <li key={promo.title} className="w-[82%] shrink-0 snap-start sm:w-[21rem] md:w-auto">
             <a
               href={waLink(promo.wa)}
               target="_blank"
@@ -59,8 +59,13 @@ export function Promos({ lang }: { lang: Locale }) {
               </h4>
               <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-neutral">{promo.body}</p>
 
+              {promo.priceBefore && (
+                <p className="mt-4 text-[0.9375rem] text-neutral line-through">{promo.priceBefore}</p>
+              )}
               {promo.price && (
-                <p className="mt-4 text-[1.375rem] font-display font-bold text-brand">
+                <p
+                  className={`${promo.priceBefore ? 'mt-0.5' : 'mt-4'} text-[1.375rem] font-display font-bold text-brand`}
+                >
                   {promo.price}
                 </p>
               )}
@@ -68,9 +73,10 @@ export function Promos({ lang }: { lang: Locale }) {
 
               <span className="mt-auto flex items-center gap-2 pt-6 text-[0.9375rem] font-semibold text-brand transition-colors group-hover:text-brand-strong">
                 <WhatsAppIcon className="h-[1.15em] w-[1.15em] shrink-0" />
-                {lang === 'es' ? 'Pedir por WhatsApp' : 'Ask on WhatsApp'}
-                <ArrowIcon className="h-4 w-4" />
+                {promo.cta ?? (lang === 'es' ? 'Pedir por WhatsApp' : 'Ask on WhatsApp')}
+                <ArrowIcon className="h-4 w-4 shrink-0" />
               </span>
+              {promo.terms && <p className="mt-3 text-[0.75rem] text-neutral">{promo.terms}</p>}
             </a>
           </li>
         ))}

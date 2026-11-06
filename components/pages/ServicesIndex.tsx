@@ -21,8 +21,8 @@ export function ServicesIndex({ lang }: { lang: Locale }) {
 
   const answer =
     lang === 'es'
-      ? `Medical Home Gdl ofrece ${services.length} servicios médicos a domicilio en Guadalajara: consulta médica general, estudios de laboratorio, pruebas rápidas, sueros intravenosos, aplicación de medicamentos, sondas, suturas, curación de heridas, evaluación médica completa, certificados médicos y paquete prenupcial. Todos disponibles las 24 horas en ${SITE.areas.length} municipios de la Zona Metropolitana.`
-      : `Medical Home Gdl offers ${services.length} at-home medical services in Guadalajara: general house calls, lab tests, rapid tests, IV therapy, medication administration, catheter care, sutures, wound care, complete medical evaluations, medical certificates and premarital packages. All available 24 hours a day across ${SITE.areas.length} municipalities of the metropolitan area.`
+      ? `Medical Home Gdl ofrece ${services.length} servicios médicos en Guadalajara: consulta médica general, estudios de laboratorio, pruebas rápidas, prueba de VSR 4 en 1, sueros intravenosos, aplicación de medicamentos, sondas, suturas, curación de heridas, evaluación médica completa, certificados médicos, paquete prenupcial, medicina interna y consulta médica en línea. Todos disponibles las 24 horas, con cobertura en ${SITE.areas.length} municipios de la Zona Metropolitana; la consulta en línea cubre todo México.`
+      : `Medical Home Gdl offers ${services.length} medical services in Guadalajara: general house calls, lab tests, rapid tests, a 4-in-1 RSV test, IV therapy, medication administration, catheter care, sutures, wound care, complete medical evaluations, medical certificates, premarital packages, internal medicine and online doctor consultations. All available 24 hours a day, covering ${SITE.areas.length} municipalities of the metropolitan area; online consultations cover all of Mexico.`
 
   return (
     <>

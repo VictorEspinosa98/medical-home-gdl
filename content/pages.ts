@@ -1,6 +1,6 @@
 import type { Locale } from './locales'
 
-export type PageId = 'home' | 'services' | 'about' | 'coverage' | 'faq'
+export type PageId = 'home' | 'services' | 'business' | 'about' | 'coverage' | 'faq'
 
 export type PageLocale = {
   /** Ruta absoluta con barra final. Debe coincidir con la carpeta en app/. */
@@ -59,18 +59,42 @@ export const PAGES: StaticPage[] = [
       navLabel: 'Servicios',
       metaTitle: 'Servicios Médicos a Domicilio en Guadalajara | Medical Home',
       metaDescription:
-        'Consultas, laboratorio, pruebas rápidas, sueros, curaciones, suturas, certificados médicos y paquete prenupcial. Todo en tu casa, 24 horas.',
+        'Consultas, medicina interna, consulta en línea, laboratorio, prueba de VSR, sueros, curaciones, certificados y paquete prenupcial en Guadalajara, 24 horas.',
       h1: 'Nuestros servicios médicos a domicilio',
-      lede: 'Once servicios que resolvemos en tu casa, con médicos titulados y material estéril. Todos disponibles las 24 horas.',
+      lede: 'Catorce servicios a domicilio, en consultorio o en línea, con médicos titulados y material estéril. Todos disponibles las 24 horas.',
     },
     en: {
       path: '/en/services/',
       navLabel: 'Services',
       metaTitle: 'At-Home Medical Services in Guadalajara | Medical Home',
       metaDescription:
-        'House calls, lab tests, rapid tests, IV therapy, wound care, sutures, medical certificates and premarital packages. All at your address, 24 hours.',
+        'House calls, internal medicine, online consultations, lab tests, RSV testing, IV therapy, wound care, certificates and premarital packages in Guadalajara, 24/7.',
       h1: 'Our at-home medical services',
-      lede: 'Eleven services we deliver at your address, with licensed doctors and sterile equipment. All available 24 hours a day.',
+      lede: 'Fourteen services at home, at our clinic or online, with licensed doctors and sterile equipment. All available 24 hours a day.',
+    },
+  },
+  {
+    id: 'business',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+    inNav: true,
+    es: {
+      path: '/es/servicios-medicos-para-empresas-guadalajara/',
+      navLabel: 'Empresas',
+      metaTitle: 'Servicios Médicos para Empresas en Guadalajara | Medical Home',
+      metaDescription:
+        'Valoraciones médicas de ingreso, certificados para trabajadores y toma de muestras de laboratorio en tus instalaciones en Guadalajara y la Zona Metropolitana.',
+      h1: 'Medical Home GDL para empresas',
+      lede: 'Valoraciones médicas de ingreso, certificados para trabajadores y toma de muestras de laboratorio en tus instalaciones en Guadalajara y la Zona Metropolitana.',
+    },
+    en: {
+      path: '/en/medical-services-for-companies-guadalajara/',
+      navLabel: 'Companies',
+      metaTitle: 'Medical Services for Companies in Guadalajara | Medical Home',
+      metaDescription:
+        'Pre-employment medical assessments, worker certificates and lab sample collection at your facilities in Guadalajara and its metro area.',
+      h1: 'Medical Home GDL for companies',
+      lede: 'Pre-employment medical assessments, worker certificates and lab sample collection at your facilities in Guadalajara and its metro area.',
     },
   },
   {

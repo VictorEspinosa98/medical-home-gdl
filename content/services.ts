@@ -28,6 +28,18 @@ export type ServiceLocale = {
   faq: { q: string; a: string }[]
   /** Texto pre-llenado del WhatsApp de esta página. */
   waMessage: string
+  /** Precio junto al botón de portada, con la vigencia de PROMOS_VALID_UNTIL. */
+  heroPrice?: string
+  /** Si existe, la portada muestra un botón de WhatsApp con este texto. */
+  heroCta?: string
+  /** Secciones propias entre la introducción y "Qué incluye". */
+  sections?: { title: string; body: string }[]
+  /** Aviso clínico destacado. */
+  urgentNote?: string
+  /** Reemplaza el texto de contacto genérico cuando no aplica. */
+  contactLede?: string
+  /** Reemplaza la cobertura genérica cuando no aplica. */
+  coverageNote?: string
 }
 
 export type Service = {
@@ -38,6 +50,8 @@ export type Service = {
   image: string
   alt: { es: string; en: string }
   schemaType: 'MedicalProcedure' | 'MedicalTest' | 'MedicalTherapy' | 'Service'
+  /** Por videollamada: sin tiempo de llegada y con cobertura nacional. */
+  online?: boolean
   es: ServiceLocale
   en: ServiceLocale
 }
@@ -1219,6 +1233,385 @@ export const SERVICES: Service[] = [
       waMessage: 'Hi, I would like information about the premarital package.',
     },
   },
+  {
+    id: 'vsr',
+    order: 12,
+    image: '/img/services/vsr',
+    alt: {
+      es: 'Profesional de salud muestra un hisopo de prueba rápida a un niño y a su mamá en su casa de Guadalajara',
+      en: 'Healthcare professional showing a rapid test swab to a boy and his mother at their home in Guadalajara',
+    },
+    schemaType: 'MedicalTest',
+    es: {
+      slug: 'prueba-vsr-guadalajara',
+      name: 'Prueba rápida de VSR en Guadalajara',
+      shortName: 'Prueba rápida del Virus Sincitial Respiratorio',
+      metaTitle: 'Prueba Rápida de VSR en Guadalajara | A Domicilio $950',
+      metaDescription:
+        'Prueba 4 en 1 de VSR, adenovirus, COVID-19 e influenza para niños y adultos, a domicilio o en consultorio en Guadalajara. Precio especial de $950 MXN.',
+      benefit: 'Cuatro virus en una sola prueba · A domicilio o en consultorio',
+      answer:
+        'La prueba rápida de VSR de Medical Home Gdl incluye virus sincitial respiratorio, adenovirus, COVID-19 e influenza en una sola prueba. Está disponible para niños y adultos, a domicilio en Guadalajara y la Zona Metropolitana o en consultorio. Tiene un precio especial de $950 MXN y el resultado se entrega durante la visita.',
+      intro:
+        'En Medical Home GDL realizamos una prueba respiratoria rápida que incluye virus sincitial respiratorio (VSR), adenovirus, COVID-19 e influenza. Está disponible para niños y adultos, con opción de realizarla a domicilio en Guadalajara y la Zona Metropolitana o en consultorio.\n\nPrecio especial de $950 MXN. Entregamos el resultado durante la visita. También podemos enviarlo por correo electrónico y, con autorización de la madre, el padre o el tutor, compartirlo con el pediatra.',
+      sections: [
+        {
+          title: '¿Qué es el VSR y por qué es importante en niños?',
+          body: 'El virus sincitial respiratorio es un virus frecuente que puede causar síntomas parecidos a los de un resfriado, como tos y escurrimiento nasal. En bebés también puede manifestarse con menor apetito o dificultad para alimentarse. En algunos casos, especialmente en bebés pequeños y prematuros, puede causar bronquiolitis o neumonía.',
+        },
+      ],
+      urgentNote:
+        'Si tu hijo presenta dificultad para respirar, pausas al respirar o labios azulados, busca atención de urgencia de inmediato.',
+      includes: [
+        'Virus sincitial respiratorio (VSR)',
+        'Adenovirus',
+        'COVID-19',
+        'Influenza',
+        'Resultado durante la visita',
+        'Envío del resultado por correo electrónico si lo solicitas',
+      ],
+      indications: [
+        'Tos y escurrimiento nasal',
+        'Bebés con menor apetito o dificultad para alimentarse',
+        'Niños y adultos con síntomas parecidos a los de un resfriado',
+        'Prefieres hacer la prueba en casa o en consultorio',
+      ],
+      faq: [
+        {
+          q: '¿Cuánto cuesta la prueba rápida de VSR?',
+          a: 'Tiene un precio especial de $950 MXN e incluye VSR, adenovirus, COVID-19 e influenza en una sola prueba.',
+        },
+        {
+          q: '¿Dónde se realiza la prueba?',
+          a: 'A domicilio en Guadalajara y la Zona Metropolitana o en consultorio. Escríbenos por WhatsApp para consultar horarios y disponibilidad en tu colonia.',
+        },
+        {
+          q: '¿Cuándo entregan el resultado?',
+          a: 'Durante la visita. También podemos enviarlo por correo electrónico y, con autorización de la madre, el padre o el tutor, compartirlo con el pediatra.',
+        },
+        {
+          q: '¿La prueba es para niños y adultos?',
+          a: 'Sí, está disponible para niños y adultos.',
+        },
+      ],
+      waMessage:
+        'Hola, me interesa la prueba respiratoria 4 en 1 (VSR, adenovirus, COVID e influenza). ¿Me pueden compartir disponibilidad a domicilio o en consultorio?',
+      heroPrice: '$950 MXN',
+      heroCta: 'Agendar prueba por WhatsApp',
+    },
+    en: {
+      slug: 'rsv-rapid-test-guadalajara',
+      name: 'RSV rapid test in Guadalajara',
+      shortName: 'Respiratory Syncytial Virus rapid test',
+      metaTitle: 'RSV Rapid Test in Guadalajara | At Home, $950 MXN',
+      metaDescription:
+        '4-in-1 test for RSV, adenovirus, COVID-19 and influenza for children and adults, at home or at our clinic in Guadalajara. Special price of $950 MXN.',
+      benefit: 'Four viruses in a single test · At home or at our clinic',
+      answer:
+        'The RSV rapid test from Medical Home Gdl covers respiratory syncytial virus, adenovirus, COVID-19 and influenza in a single test. It is available for children and adults, at home in Guadalajara and its metro area or at our clinic. The special price is $950 MXN and the result is delivered during the visit.',
+      intro:
+        'At Medical Home GDL we perform a rapid respiratory test that covers respiratory syncytial virus (RSV), adenovirus, COVID-19 and influenza. It is available for children and adults, at home in Guadalajara and its metro area or at our clinic.\n\nSpecial price of $950 MXN. We deliver the result during the visit. We can also send it by email and, with authorization from the mother, father or guardian, share it with the pediatrician.',
+      sections: [
+        {
+          title: 'What is RSV and why does it matter in children?',
+          body: 'Respiratory syncytial virus is a common virus that can cause cold-like symptoms such as cough and a runny nose. In babies it can also show up as reduced appetite or difficulty feeding. In some cases, especially in young and premature babies, it can cause bronchiolitis or pneumonia.',
+        },
+      ],
+      urgentNote:
+        'If your child has difficulty breathing, pauses in breathing or bluish lips, seek emergency care immediately.',
+      includes: [
+        'Respiratory syncytial virus (RSV)',
+        'Adenovirus',
+        'COVID-19',
+        'Influenza',
+        'Result during the visit',
+        'Result sent by email on request',
+      ],
+      indications: [
+        'Cough and a runny nose',
+        'Babies with reduced appetite or difficulty feeding',
+        'Children and adults with cold-like symptoms',
+        'You would rather test at home or at our clinic',
+      ],
+      faq: [
+        {
+          q: 'How much does the RSV rapid test cost?',
+          a: 'The special price is $950 MXN and it covers RSV, adenovirus, COVID-19 and influenza in a single test.',
+        },
+        {
+          q: 'Where is the test done?',
+          a: 'At home in Guadalajara and its metro area or at our clinic. Message us on WhatsApp to check times and availability in your neighborhood.',
+        },
+        {
+          q: 'When do you deliver the result?',
+          a: 'During the visit. We can also send it by email and, with authorization from the mother, father or guardian, share it with the pediatrician.',
+        },
+        {
+          q: 'Is the test for children and adults?',
+          a: 'Yes, it is available for children and adults.',
+        },
+      ],
+      waMessage:
+        'Hi, I am interested in the 4-in-1 respiratory test (RSV, adenovirus, COVID and influenza). Could you share availability at home or at the clinic?',
+      heroPrice: '$950 MXN',
+      heroCta: 'Book the test on WhatsApp',
+    },
+  },
+  {
+    id: 'medicina-interna',
+    order: 13,
+    image: '/img/services/medicina-interna',
+    alt: {
+      es: 'Médico internista conversa con una paciente en un consultorio con vista a la Catedral de Guadalajara',
+      en: 'Internal medicine doctor talking with a patient in a clinic overlooking the Guadalajara Cathedral',
+    },
+    schemaType: 'Service',
+    es: {
+      slug: 'medicina-interna-guadalajara',
+      name: 'Medicina interna en Guadalajara',
+      shortName: 'Medicina interna',
+      metaTitle: 'Medicina Interna en Guadalajara | Consultorio o Domicilio',
+      metaDescription:
+        'Consulta con médico especialista en Medicina Interna, en consultorio o a domicilio en Guadalajara y la Zona Metropolitana. Agenda por WhatsApp.',
+      benefit: 'Consulta con un médico especialista en consultorio o a domicilio',
+      answer:
+        'La Medicina Interna de Medical Home Gdl ofrece consulta con un médico especialista para el diagnóstico, tratamiento y seguimiento de problemas de salud que requieren atención especializada. Puedes atenderte en consultorio o a domicilio en Guadalajara y la Zona Metropolitana, según cobertura y disponibilidad, en primera consulta o en seguimiento.',
+      intro:
+        'En Medical Home GDL contamos con el servicio de Medicina Interna para el diagnóstico, tratamiento y seguimiento de problemas de salud que requieren atención especializada. Puedes agendar una primera consulta o continuar el seguimiento de un padecimiento con nuestro médico internista.',
+      sections: [
+        {
+          title: '¿Qué es la Medicina Interna?',
+          body: 'La Medicina Interna es una especialidad que evalúa tu salud en conjunto. El internista toma en cuenta tus síntomas, antecedentes y tratamientos para orientar el diagnóstico y definir un plan de atención. Puedes acudir si tienes síntomas que persisten, necesitas seguimiento de una enfermedad crónica o buscas una valoración que considere varios problemas de salud al mismo tiempo.',
+        },
+        {
+          title: '¿Dónde puedo recibir atención?',
+          body: 'Puedes agendar tu consulta en consultorio o solicitar una visita a domicilio en Guadalajara y la Zona Metropolitana, según cobertura y disponibilidad. Si tú o un familiar ya se encuentran hospitalizados, también puedes consultar la posibilidad de coordinar una valoración con el especialista.',
+        },
+      ],
+      includes: [
+        'Valoración de síntomas',
+        'Revisión de estudios',
+        'Seguimiento de enfermedades crónicas',
+        'Plan de atención según tus síntomas, antecedentes y tratamientos',
+      ],
+      indications: [
+        'Síntomas que persisten',
+        'Seguimiento de una enfermedad crónica',
+        'Valoración de varios problemas de salud al mismo tiempo',
+        'Un familiar hospitalizado que requiere valoración del especialista',
+      ],
+      faq: [
+        {
+          q: '¿Qué hace un médico internista?',
+          a: 'Evalúa tu salud en conjunto. Toma en cuenta tus síntomas, antecedentes y tratamientos para orientar el diagnóstico y definir un plan de atención.',
+        },
+        {
+          q: '¿Cuándo debo acudir a Medicina Interna?',
+          a: 'Si tienes síntomas que persisten, necesitas seguimiento de una enfermedad crónica o buscas una valoración que considere varios problemas de salud al mismo tiempo.',
+        },
+        {
+          q: '¿La consulta es en consultorio o a domicilio?',
+          a: 'Puedes elegir cualquiera de las dos en Guadalajara y la Zona Metropolitana, según cobertura y disponibilidad.',
+        },
+        {
+          q: '¿Pueden valorar a un familiar hospitalizado?',
+          a: 'Puedes consultar con nosotros la posibilidad de coordinar una valoración con el especialista.',
+        },
+      ],
+      waMessage:
+        'Hola, quiero agendar una consulta de Medicina Interna. ¿Me pueden compartir los horarios disponibles?',
+      heroCta: 'Agenda tu consulta de Medicina Interna por WhatsApp',
+    },
+    en: {
+      slug: 'internal-medicine-guadalajara',
+      name: 'Internal medicine in Guadalajara',
+      shortName: 'Internal medicine',
+      metaTitle: 'Internal Medicine in Guadalajara | Clinic or House Call',
+      metaDescription:
+        'See an internal medicine specialist at our clinic or at home in Guadalajara and its metro area. Book on WhatsApp.',
+      benefit: 'See a medical specialist at our clinic or at home',
+      answer:
+        'Internal medicine at Medical Home Gdl offers visits with a medical specialist to diagnose, treat and follow up on health problems that need specialized care. You can be seen at our clinic or at home in Guadalajara and its metro area, subject to coverage and availability, for a first visit or for follow-up.',
+      intro:
+        'At Medical Home GDL we offer internal medicine for the diagnosis, treatment and follow-up of health problems that need specialized care. You can book a first visit or continue following a condition with our internist.',
+      sections: [
+        {
+          title: 'What is internal medicine?',
+          body: 'Internal medicine is a specialty that assesses your health as a whole. The internist considers your symptoms, history and treatments to guide the diagnosis and define a care plan. You can come in if you have persistent symptoms, need follow-up for a chronic condition or want an assessment that considers several health problems at once.',
+        },
+        {
+          title: 'Where can I receive care?',
+          body: 'You can book a visit at our clinic or request a house call in Guadalajara and its metro area, subject to coverage and availability. If you or a relative are already in hospital, you can also ask about arranging an assessment with the specialist.',
+        },
+      ],
+      includes: [
+        'Symptom assessment',
+        'Review of test results',
+        'Follow-up of chronic conditions',
+        'Care plan based on your symptoms, history and treatments',
+      ],
+      indications: [
+        'Persistent symptoms',
+        'Follow-up of a chronic condition',
+        'Assessment of several health problems at once',
+        'A hospitalized relative who needs a specialist assessment',
+      ],
+      faq: [
+        {
+          q: 'What does an internist do?',
+          a: 'An internist assesses your health as a whole, considering your symptoms, history and treatments to guide the diagnosis and define a care plan.',
+        },
+        {
+          q: 'When should I see an internist?',
+          a: 'If you have persistent symptoms, need follow-up for a chronic condition or want an assessment that considers several health problems at once.',
+        },
+        {
+          q: 'Is the visit at the clinic or at home?',
+          a: 'You can choose either in Guadalajara and its metro area, subject to coverage and availability.',
+        },
+        {
+          q: 'Can you assess a hospitalized relative?',
+          a: 'You can ask us about the possibility of arranging an assessment with the specialist.',
+        },
+      ],
+      waMessage: 'Hi, I would like to book an internal medicine visit. Could you share the available times?',
+      heroCta: 'Book your internal medicine visit on WhatsApp',
+    },
+  },
+  {
+    id: 'consulta-en-linea',
+    order: 14,
+    // ponytail: foto reusada; el documento no trae una. Cambiar al recibir la propia.
+    image: '/img/services/evaluacion-completa',
+    alt: {
+      es: 'Médico conversa con una paciente mientras revisa su información clínica',
+      en: 'Doctor talking with a patient while reviewing her clinical information',
+    },
+    schemaType: 'Service',
+    online: true,
+    es: {
+      slug: 'consulta-medica-en-linea',
+      name: 'Consulta médica en línea',
+      shortName: 'Consulta médica en línea',
+      metaTitle: 'Consulta Médica en Línea en México | Medical Home Gdl',
+      metaDescription:
+        'Habla con un médico por videollamada desde cualquier parte de México. Normal $650 MXN, en promoción $450 MXN. Receta digital cuando se indique.',
+      benefit: 'Consulta médica virtual en todo México',
+      answer:
+        'La consulta médica en línea de Medical Home Gdl te permite hablar con un médico por videollamada desde tu celular, tableta o computadora, en todo México. Sirve para valorar síntomas, revisar estudios o dar seguimiento a un tratamiento. Su precio normal es de $650 MXN, en promoción $450 MXN, con pago previo a la consulta.',
+      intro:
+        'En Medical Home GDL puedes hablar con un médico desde tu celular, tableta o computadora. La consulta en línea permite valorar síntomas, revisar resultados de estudios o dar seguimiento a un tratamiento cuando el motivo de consulta puede atenderse de forma virtual.',
+      sections: [
+        {
+          title: '¿Cómo funciona?',
+          body: 'Agenda tu cita por WhatsApp. El costo normal es de $650 MXN, en promoción $450 MXN, y el pago se realiza antes de la consulta. Te compartiremos las indicaciones para conectarte a la videollamada.\n\nDurante la consulta, el médico revisará tus síntomas, antecedentes y estudios disponibles para orientarte sobre los siguientes pasos. Si necesitas una exploración física o una valoración presencial, te lo indicará.',
+        },
+        {
+          title: 'Receta médica digital',
+          body: 'Si el médico te prescribe un tratamiento, recibirás la receta en formato digital. Podrás presentarla en farmacias que acepten este formato. Algunos medicamentos requieren una receta especial.',
+        },
+      ],
+      includes: [
+        'Videollamada con un médico',
+        'Valoración de síntomas',
+        'Revisión de resultados de estudios',
+        'Seguimiento de tu tratamiento',
+        'Receta digital cuando se indique',
+      ],
+      indications: [
+        'Quieres valorar síntomas sin salir de casa',
+        'Necesitas revisar resultados de estudios',
+        'Das seguimiento a un tratamiento',
+        'Tu motivo de consulta puede atenderse de forma virtual',
+      ],
+      faq: [
+        {
+          q: '¿Cuánto cuesta la consulta médica en línea?',
+          a: 'Su precio normal es de $650 MXN y en promoción cuesta $450 MXN por consulta. El pago se realiza antes de la consulta.',
+        },
+        {
+          q: '¿Cómo agendo la consulta en línea?',
+          a: 'Por WhatsApp. Te compartimos los horarios disponibles y las indicaciones para conectarte a la videollamada.',
+        },
+        {
+          q: '¿Recibo receta en la consulta en línea?',
+          a: 'Si el médico te prescribe un tratamiento, recibirás la receta en formato digital. Podrás presentarla en farmacias que acepten este formato. Algunos medicamentos requieren una receta especial.',
+        },
+        {
+          q: '¿Qué pasa si necesito una revisión presencial?',
+          a: 'Si necesitas una exploración física o una valoración presencial, el médico te lo indicará durante la consulta.',
+        },
+      ],
+      waMessage:
+        'Hola, me gustaría agendar una consulta médica virtual. ¿Me pueden compartir los horarios disponibles y las indicaciones para poder agendar?',
+      heroPrice: 'Antes $650 MXN · Ahora $450 MXN',
+      heroCta: 'Agenda tu consulta médica en línea por WhatsApp',
+      contactLede:
+        'Escríbenos por WhatsApp. Te compartimos los horarios disponibles y las indicaciones para conectarte a la videollamada.',
+      coverageNote: 'Todo México',
+    },
+    en: {
+      slug: 'online-doctor-consultation',
+      name: 'Online doctor consultation',
+      shortName: 'Online doctor consultation',
+      metaTitle: 'Online Doctor Consultation in Mexico | Medical Home Gdl',
+      metaDescription:
+        'Talk to a doctor by video call from anywhere in Mexico. Regular price $650 MXN, on offer for $450 MXN. Digital prescription when indicated.',
+      benefit: 'Virtual medical consultation anywhere in Mexico',
+      answer:
+        'The online doctor consultation from Medical Home Gdl lets you talk to a doctor by video call from your phone, tablet or computer, anywhere in Mexico. It can be used to assess symptoms, review test results or follow up on a treatment. The regular price is $650 MXN, on offer for $450 MXN, paid before the consultation.',
+      intro:
+        'At Medical Home GDL you can talk to a doctor from your phone, tablet or computer. The online consultation lets you assess symptoms, review test results or follow up on a treatment when the reason for your visit can be handled virtually.',
+      sections: [
+        {
+          title: 'How does it work?',
+          body: 'Book your appointment on WhatsApp. The regular price is $650 MXN, on offer for $450 MXN, and payment is made before the consultation. We will share the instructions for joining the video call.\n\nDuring the consultation, the doctor will review your symptoms, history and any available test results to guide you on next steps. If you need a physical exam or an in-person assessment, the doctor will tell you.',
+        },
+        {
+          title: 'Digital prescription',
+          body: 'If the doctor prescribes a treatment, you will receive the prescription in digital format. You can present it at pharmacies that accept this format. Some medications require a special prescription.',
+        },
+      ],
+      includes: [
+        'Video call with a doctor',
+        'Symptom assessment',
+        'Review of test results',
+        'Treatment follow-up',
+        'Digital prescription when indicated',
+      ],
+      indications: [
+        'You want symptoms assessed without leaving home',
+        'You need test results reviewed',
+        'You are following up on a treatment',
+        'The reason for your visit can be handled virtually',
+      ],
+      faq: [
+        {
+          q: 'How much does the online consultation cost?',
+          a: 'The regular price is $650 MXN and the offer price is $450 MXN per consultation. Payment is made before the consultation.',
+        },
+        {
+          q: 'How do I book the online consultation?',
+          a: 'On WhatsApp. We share the available times and the instructions for joining the video call.',
+        },
+        {
+          q: 'Do I get a prescription from an online consultation?',
+          a: 'If the doctor prescribes a treatment, you will receive the prescription in digital format. You can present it at pharmacies that accept this format. Some medications require a special prescription.',
+        },
+        {
+          q: 'What if I need an in-person exam?',
+          a: 'If you need a physical exam or an in-person assessment, the doctor will tell you during the consultation.',
+        },
+      ],
+      waMessage:
+        'Hi, I would like to book a virtual medical consultation. Could you share the available times and instructions for booking?',
+      heroPrice: 'Was $650 MXN · Now $450 MXN',
+      heroCta: 'Book your online consultation on WhatsApp',
+      contactLede:
+        'Message us on WhatsApp. We share the available times and the instructions for joining the video call.',
+      coverageNote: 'All of Mexico',
+    },
+  },
 ]
 
 /** Segmento de URL del índice de servicios, por idioma. */
@@ -1253,17 +1646,20 @@ export const sortedServices = (): Service[] => [...SERVICES].sort((a, b) => a.or
  * footer, salvo cuando la relación clínica lo justifica de verdad.
  */
 const RELATED: Record<string, [string, string, string]> = {
-  'consulta-domicilio': ['evaluacion-completa', 'laboratorio', 'medicamentos'],
+  'consulta-domicilio': ['medicina-interna', 'consulta-en-linea', 'evaluacion-completa'],
   laboratorio: ['pruebas-rapidas', 'evaluacion-completa', 'consulta-domicilio'],
-  'pruebas-rapidas': ['laboratorio', 'sueros', 'consulta-domicilio'],
+  'pruebas-rapidas': ['vsr', 'laboratorio', 'sueros'],
   sueros: ['medicamentos', 'curaciones', 'pruebas-rapidas'],
   medicamentos: ['sueros', 'curaciones', 'sondas'],
   sondas: ['curaciones', 'medicamentos', 'suturas'],
   suturas: ['curaciones', 'certificados', 'sondas'],
   curaciones: ['suturas', 'sondas', 'medicamentos'],
-  'evaluacion-completa': ['laboratorio', 'certificados', 'prenupcial'],
+  'evaluacion-completa': ['medicina-interna', 'laboratorio', 'certificados'],
   certificados: ['prenupcial', 'evaluacion-completa', 'suturas'],
   prenupcial: ['certificados', 'laboratorio', 'evaluacion-completa'],
+  vsr: ['pruebas-rapidas', 'consulta-domicilio', 'laboratorio'],
+  'medicina-interna': ['consulta-en-linea', 'evaluacion-completa', 'laboratorio'],
+  'consulta-en-linea': ['medicina-interna', 'consulta-domicilio', 'evaluacion-completa'],
 }
 
 export const relatedServices = (id: string): Service[] => {

@@ -68,11 +68,15 @@ export function CtaBand({
   title,
   body,
   message,
+  coverage,
+  ctaLabel,
 }: {
   lang: Locale
   title: string
   body: string
   message: string
+  coverage?: string
+  ctaLabel?: string
 }) {
   return (
     <section className="section relative overflow-hidden bg-ink text-white">
@@ -88,7 +92,7 @@ export function CtaBand({
         <h2 className="text-h1 text-white">{title}</h2>
         <p className="mx-auto mt-5 max-w-xl text-mist">{body}</p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <WhatsAppCta lang={lang} message={message} />
+          <WhatsAppCta lang={lang} message={message} label={ctaLabel} />
           <a href={telLink()} className="btn glass-dark rounded-full text-white">
             <PhoneIcon className="h-[1.2em] w-[1.2em] shrink-0" />
             {UI[lang].ctaCall}
@@ -96,9 +100,10 @@ export function CtaBand({
         </div>
         <p className="mt-6 text-[0.9375rem] text-mist/80">
           {UI[lang].hoursValue} ·{' '}
-          {lang === 'es'
-            ? 'toda la ZMG, Morelia y Querétaro'
-            : 'all of metro Guadalajara, Morelia and Queretaro'}
+          {coverage ??
+            (lang === 'es'
+              ? 'toda la ZMG, Morelia y Querétaro'
+              : 'all of metro Guadalajara, Morelia and Queretaro')}
         </p>
       </div>
     </section>

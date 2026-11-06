@@ -8,6 +8,7 @@ import { Promos } from '@/components/Promos'
 import { Reveal } from '@/components/Reveal'
 import { AnswerBlock, SectionHead } from '@/components/Sections'
 import { ServiceCard } from '@/components/ServiceCard'
+import { BUSINESS } from '@/content/business'
 import { FAQ } from '@/content/faq'
 import { ABOUT_TEASER, FINAL_CTA, HERO, PILLARS, PILLARS_HEADING, STEPS, STEPS_HEADING } from '@/content/home'
 import { LOCALES, type Locale } from '@/content/locales'
@@ -183,6 +184,33 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
                 <ArrowIcon className="h-4 w-4" />
               </a>
             </div>
+
+            <a
+              href={pagePath(lang, 'business')}
+              className="card card-link group mt-10 grid items-center gap-6 overflow-hidden p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:p-7"
+            >
+              <Img
+                src="/img/empresas"
+                alt={BUSINESS[lang].imageAlt}
+                aspect="16 / 9"
+                sizes="(min-width: 768px) 320px, 94vw"
+              />
+              <span className="block">
+                <span className="block text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-brand">
+                  {BUSINESS[lang].homeCardEyebrow}
+                </span>
+                <span className="mt-2 block font-display text-h3 font-bold text-deep">
+                  {BUSINESS[lang].homeCardTitle}
+                </span>
+                <span className="mt-2.5 block text-[0.9375rem] leading-relaxed text-neutral">
+                  {BUSINESS[lang].homeCardBody}
+                </span>
+                <span className="mt-4 flex items-center gap-2 font-semibold text-brand transition-colors group-hover:text-brand-strong">
+                  {BUSINESS[lang].homeCardCta}
+                  <ArrowIcon className="h-4 w-4" />
+                </span>
+              </span>
+            </a>
           </div>
         </section>
 
@@ -288,8 +316,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: Loc
             medical: true,
           }),
           faqPageSchema(topFaqs, homeUrl),
-          // Solo las promos con un precio numérico real emiten Offer; el
-          // resto ("Paquete con descuento") es copy, no un precio.
+          // Solo las promos con un precio numérico real emiten Offer.
           ...PROMOS[lang]
             .map((promo) => promoOfferSchema(promo, lang, homeUrl))
             .filter((offer) => offer !== null),

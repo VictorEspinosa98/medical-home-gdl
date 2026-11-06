@@ -146,15 +146,46 @@ export function serviceSchema(service: Service, lang: Locale, url: string) {
     inLanguage: HTML_LANG[lang],
     image: jsonLdImage(service.image, 1280),
     provider: { '@id': BUSINESS_ID },
-    areaServed: allAreaNames.map((name) => ({ '@type': 'City', name })),
+    areaServed: service.online
+      ? { '@type': 'Country', name: 'México' }
+      : allAreaNames.map((name) => ({ '@type': 'City', name })),
     ...(service.schemaType === 'Service'
-      ? { serviceType: t.shortName, providerMobility: 'dynamic' }
+      ? { serviceType: t.shortName, ...(service.online ? {} : { providerMobility: 'dynamic' }) }
       : // `howPerformed` lo define MedicalProcedure (y lo hereda
         // MedicalTherapy). MedicalTest es hermano, no descendiente: ahí la
         // propiedad queda fuera de vocabulario, así que no se emite.
         service.schemaType === 'MedicalTest'
         ? {}
         : { howPerformed: t.intro.split('\n\n')[0] }),
+  }
+}
+
+/** Servicio de la página de Empresas: mismo proveedor, audiencia corporativa. */
+export function businessServiceSchema({
+  name,
+  description,
+  lang,
+  url,
+  image,
+}: {
+  name: string
+  description: string
+  lang: Locale
+  url: string
+  image: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name,
+    description,
+    url,
+    inLanguage: HTML_LANG[lang],
+    image,
+    provider: { '@id': BUSINESS_ID },
+    areaServed: SITE.areas.map((city) => ({ '@type': 'City', name: city })),
+    audience: { '@type': 'BusinessAudience', audienceType: lang === 'es' ? 'Empresas' : 'Companies' },
   }
 }
 
@@ -243,16 +274,17 @@ const leadingPrice = (raw?: string): number | null => {
 /**
  * `Offer` de una promoción, SOLO si trae un precio numérico real.
  *
- * "Paquete con descuento" o "Precio por paquete" son copy, no precios:
- * convertirlos en `price` sería inventar una cifra que Google puede acabar
- * mostrando tal cual en el SERP. Devuelve `null` y el llamador lo filtra.
+ * Una promo sin cifra no emite Offer: convertir copy en `price` sería inventar
+ * un dato que Google puede acabar mostrando tal cual en el SERP. Devuelve
+ * `null` y el llamador lo filtra.
  *
  * "Desde $850" es un mínimo, no un precio cerrado — de ahí `minPrice` y no
- * `price`.
+ * `price`. El precio anterior vive en `priceBefore` y nunca llega aquí.
  */
 export function promoOfferSchema(promo: Promo, lang: Locale, url: string) {
-  const minPrice = leadingPrice(promo.price)
-  if (minPrice === null) return null
+  const amount = leadingPrice(promo.price)
+  if (amount === null) return null
+  const isMinimum = /^(desde|from)\b/i.test(promo.price ?? '')
 
   return {
     '@context': 'https://schema.org',
@@ -260,11 +292,15 @@ export function promoOfferSchema(promo: Promo, lang: Locale, url: string) {
     name: promo.title,
     description: promo.body,
     priceCurrency: 'MXN',
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      minPrice,
-      priceCurrency: 'MXN',
-    },
+    ...(isMinimum
+      ? {
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            minPrice: amount,
+            priceCurrency: 'MXN',
+          },
+        }
+      : { price: amount }),
     availableAtOrFrom: { '@id': BUSINESS_ID },
     seller: { '@id': BUSINESS_ID },
     areaServed: allAreaNames.map((name) => ({ '@type': 'City', name })),

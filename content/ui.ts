@@ -81,7 +81,7 @@ export const UI: Record<Locale, Ui> = {
 
     sectionServices: 'Qué resolvemos en tu casa',
     sectionServicesLede:
-      'Once servicios médicos que llevamos a tu domicilio, con material estéril y médicos titulados.',
+      'Catorce servicios médicos a domicilio, en consultorio o en línea, con material estéril y médicos titulados.',
     sectionIncludes: 'Qué incluye',
     sectionIndications: 'Cuándo pedirlo',
     sectionFaq: 'Preguntas frecuentes',
@@ -140,7 +140,7 @@ export const UI: Record<Locale, Ui> = {
 
     sectionServices: 'What we handle at your address',
     sectionServicesLede:
-      'Eleven medical services delivered to your door, with sterile equipment and licensed doctors.',
+      'Fourteen medical services at home, at our clinic or online, with sterile equipment and licensed doctors.',
     sectionIncludes: 'What it includes',
     sectionIndications: 'When to book it',
     sectionFaq: 'Frequently asked questions',

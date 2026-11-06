@@ -19,6 +19,10 @@
 # (o con fr/de/pt) recibe un 404 en la raíz del sitio.
 /                    /es/                     302
 
+# URLs cortas de campaña pedidas por el cliente.
+/prueba-vsr-guadalajara                      /es/servicios/prueba-vsr-guadalajara/          301
+/servicios-medicos-para-empresas-guadalajara /es/servicios-medicos-para-empresas-guadalajara/ 301
+
 # Rutas sin locale — defensivo, por si alguien enlaza sin prefijo de idioma.
 /servicios/*         /es/servicios/:splat     301
 /services/*          /en/services/:splat      301

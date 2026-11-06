@@ -19,6 +19,11 @@
     "width": 578,
     "height": 124
   },
+  "/img/empresas": {
+    "base": "/img/empresas.987edc95",
+    "width": 1672,
+    "height": 941
+  },
   "/img/hero": {
     "base": "/img/hero.1fc4c81d",
     "width": 1707,
@@ -54,6 +59,11 @@
     "width": 1335,
     "height": 2000
   },
+  "/img/services/medicina-interna": {
+    "base": "/img/services/medicina-interna.862d5f9b",
+    "width": 1672,
+    "height": 941
+  },
   "/img/services/prenupcial": {
     "base": "/img/services/prenupcial.96f22ddd",
     "width": 2000,
@@ -78,6 +88,11 @@
     "base": "/img/services/suturas.44e43adf",
     "width": 1920,
     "height": 1200
+  },
+  "/img/services/vsr": {
+    "base": "/img/services/vsr.2d6b5b59",
+    "width": 1756,
+    "height": 895
   },
   "/img/og/default": {
     "base": "/img/og/default",

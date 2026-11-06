@@ -11,6 +11,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ABOUT_HEADINGS, MISSION, VALUES, VISION } from '../content/about'
+import { BUSINESS } from '../content/business'
 import { AREAS, COVERAGE_COPY } from '../content/coverage'
 import { FAQ } from '../content/faq'
 import { HERO } from '../content/home'
@@ -55,7 +56,9 @@ const promosBlock = (lang: Locale): string => {
     '',
     promos
       .map((promo) => {
-        const detail = [promo.price, promo.note].filter(Boolean).join(' - ')
+        const detail = [promo.priceBefore, promo.price, promo.note, promo.terms]
+          .filter(Boolean)
+          .join(' - ')
         return `- **${promo.title}**${detail ? ` (${detail})` : ''}: ${promo.body}`
       })
       .join('\n'),
@@ -179,6 +182,9 @@ function serviceDoc(serviceId: string, lang: Locale): string {
     '',
     s.intro,
     '',
+    ...(s.heroPrice ? [`**${L ? 'Precio' : 'Price'}:** ${s.heroPrice}. ${promosValidUntilLabel(lang)}.`, ''] : []),
+    ...(s.sections ?? []).flatMap((section) => [`## ${section.title}`, '', section.body, '']),
+    ...(s.urgentNote ? [`> **${L ? 'Importante' : 'Important'}:** ${s.urgentNote}`, ''] : []),
     `## ${L ? 'Qué incluye' : 'What it includes'}`,
     '',
     bullets(s.includes),
@@ -190,6 +196,40 @@ function serviceDoc(serviceId: string, lang: Locale): string {
     `## ${L ? 'Preguntas frecuentes' : 'Frequently asked questions'}`,
     '',
     s.faq.map((f) => `### ${f.q}\n\n${f.a}`).join('\n\n'),
+    '',
+    contactBlock(lang),
+    '',
+  ].join('\n')
+}
+
+function businessDoc(lang: Locale): string {
+  const p = page('business')[lang]
+  const b = BUSINESS[lang]
+
+  return [
+    frontMatter({
+      title: p.metaTitle,
+      url: `${SITE.url}${p.path}`,
+      lang: HTML_LANG[lang],
+      type: 'business',
+    }),
+    `# ${p.h1}`,
+    '',
+    `> ${p.lede}`,
+    '',
+    b.answer,
+    '',
+    `## ${b.servicesTitle}`,
+    '',
+    b.services.map((service) => `### ${service.title}\n\n${service.body}`).join('\n\n'),
+    '',
+    `## ${b.stepsTitle}`,
+    '',
+    b.steps.map((step, i) => `${i + 1}. **${step.title}.** ${step.body}`).join('\n'),
+    '',
+    `## ${b.closingTitle}`,
+    '',
+    b.closingBody,
     '',
     contactBlock(lang),
     '',
@@ -359,6 +399,7 @@ async function main() {
   for (const lang of LOCALES) {
     docs.push({ path: page('home')[lang].path, body: homeDoc(lang) })
     docs.push({ path: page('services')[lang].path, body: servicesIndexDoc(lang) })
+    docs.push({ path: page('business')[lang].path, body: businessDoc(lang) })
     docs.push({ path: page('about')[lang].path, body: aboutDoc(lang) })
     docs.push({ path: page('coverage')[lang].path, body: coverageDoc(lang) })
     docs.push({ path: page('faq')[lang].path, body: faqDoc(lang) })

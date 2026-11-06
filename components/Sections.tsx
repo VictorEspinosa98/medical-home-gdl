@@ -157,19 +157,29 @@ function ContactRow({
 }
 
 /** Tarjeta de contacto. Es el `.glass` #2 de los tres permitidos. */
-export function ContactCard({ lang, message }: { lang: Locale; message: string }) {
+export function ContactCard({
+  lang,
+  message,
+  lede,
+  coverage,
+}: {
+  lang: Locale
+  message: string
+  lede?: string
+  coverage?: string
+}) {
   const t = UI[lang]
   return (
     <div className="glass rounded-[var(--radius-card)] p-7 md:p-8">
       <h2 className="text-h3">{t.contactTitle}</h2>
-      <p className="mt-3 text-neutral">{t.contactLede}</p>
+      <p className="mt-3 text-neutral">{lede ?? t.contactLede}</p>
 
       <dl className="mt-6 space-y-4">
         <ContactRow icon={ClockIcon} label={t.hours}>
           {t.hoursValue}
         </ContactRow>
         <ContactRow icon={PinIcon} label={t.coverageLabel}>
-          {allAreaNames.join(' · ')}
+          {coverage ?? allAreaNames.join(' · ')}
         </ContactRow>
         <ContactRow icon={PhoneIcon} label={t.phoneLabel}>
           <a href={telLink()} className="transition-colors hover:text-brand">

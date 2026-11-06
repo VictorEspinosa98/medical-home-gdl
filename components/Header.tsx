@@ -30,7 +30,7 @@ export function Header({ lang, currentRef }: { lang: Locale; currentRef: RouteRe
         </a>
 
         {/* Desktop */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label={t.footerNav}>
+        <nav className="hidden items-center gap-1 lg:flex" aria-label={t.footerNav}>
           {links.map((p) => (
             <a
               key={p.id}
@@ -42,7 +42,7 @@ export function Header({ lang, currentRef }: { lang: Locale; currentRef: RouteRe
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2.5 md:flex">
+        <div className="hidden items-center gap-2.5 lg:flex">
           <LanguageSwitcher
             href={pathOf(other, currentRef)}
             target={other}
@@ -62,7 +62,7 @@ export function Header({ lang, currentRef }: { lang: Locale; currentRef: RouteRe
         </div>
 
         {/* Móvil — <details> nativo */}
-        <details className="group relative md:hidden">
+        <details className="group relative lg:hidden">
           <summary
             className="flex h-11 w-11 items-center justify-center rounded-full border border-mist text-deep"
             aria-label={t.openMenu}
