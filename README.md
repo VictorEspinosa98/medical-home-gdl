@@ -59,7 +59,8 @@ content/          ← FUENTE ÚNICA DE VERDAD. Todo el copy vive aquí.
   site.ts           datos de contacto y cobertura   ⚠️ el archivo a editar
   services.ts       los 14 servicios, ES + EN
   business.ts       copy de la página de Empresas
-  pages.ts          rutas y metadatos de las 6 páginas estáticas
+  privacy.ts        aviso de privacidad, ES + EN
+  pages.ts          rutas y metadatos de las 7 páginas estáticas
   about.ts          misión, visión, 6 valores
   coverage.ts       municipios y colonias
   faq.ts            preguntas generales

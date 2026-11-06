@@ -1,6 +1,6 @@
 import type { Locale } from './locales'
 
-export type PageId = 'home' | 'services' | 'business' | 'about' | 'coverage' | 'faq'
+export type PageId = 'home' | 'services' | 'business' | 'about' | 'coverage' | 'faq' | 'privacy'
 
 export type PageLocale = {
   /** Ruta absoluta con barra final. Debe coincidir con la carpeta en app/. */
@@ -167,6 +167,30 @@ export const PAGES: StaticPage[] = [
         'How long the doctor takes, what the visit includes, whether doctors speak English, night coverage and which areas we serve. Straight answers.',
       h1: 'Frequently asked questions',
       lede: 'What people ask us most before booking a visit, answered without the runaround.',
+    },
+  },
+  {
+    id: 'privacy',
+    priority: 0.3,
+    changeFrequency: 'yearly',
+    inNav: false,
+    es: {
+      path: '/es/aviso-de-privacidad/',
+      navLabel: 'Aviso de privacidad',
+      metaTitle: 'Aviso de Privacidad | Medical Home Gdl',
+      metaDescription:
+        'Qué datos personales y de salud recaba Medical Home Gdl, para qué los usa, con quién los comparte y cómo ejercer tus derechos ARCO.',
+      h1: 'Aviso de privacidad',
+      lede: 'Cómo tratamos tus datos personales y de salud, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.',
+    },
+    en: {
+      path: '/en/privacy-notice/',
+      navLabel: 'Privacy notice',
+      metaTitle: 'Privacy Notice | Medical Home Gdl',
+      metaDescription:
+        'What personal and health data Medical Home Gdl collects, how it is used, who it is shared with and how to exercise your ARCO rights.',
+      h1: 'Privacy notice',
+      lede: 'How we handle your personal and health data, under Mexico’s Federal Law on Protection of Personal Data Held by Private Parties.',
     },
   },
 ]

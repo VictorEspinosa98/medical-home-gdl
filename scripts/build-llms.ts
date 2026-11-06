@@ -17,6 +17,7 @@ import { FAQ } from '../content/faq'
 import { HERO } from '../content/home'
 import { HTML_LANG, LOCALES, type Locale } from '../content/locales'
 import { PAGES, page } from '../content/pages'
+import { PRIVACY } from '../content/privacy'
 import {
   PROMOS,
   PROMOS_HEADING,
@@ -274,6 +275,33 @@ function businessDoc(lang: Locale): string {
   ].join('\n')
 }
 
+function privacyDoc(lang: Locale): string {
+  const p = page('privacy')[lang]
+  const copy = PRIVACY[lang]
+
+  return [
+    frontMatter({
+      title: p.metaTitle,
+      url: `${SITE.url}${p.path}`,
+      lang: HTML_LANG[lang],
+      type: 'privacy',
+    }),
+    `# ${p.h1}`,
+    '',
+    `> ${p.lede}`,
+    '',
+    copy.updatedLabel,
+    '',
+    ...copy.sections.flatMap((section) => [
+      `## ${section.title}`,
+      '',
+      section.paragraphs.join('\n\n'),
+      '',
+      ...(section.items ? [bullets(section.items), ''] : []),
+    ]),
+  ].join('\n')
+}
+
 function aboutDoc(lang: Locale): string {
   const p = page('about')[lang]
 
@@ -441,6 +469,7 @@ async function main() {
     docs.push({ path: page('about')[lang].path, body: aboutDoc(lang) })
     docs.push({ path: page('coverage')[lang].path, body: coverageDoc(lang) })
     docs.push({ path: page('faq')[lang].path, body: faqDoc(lang) })
+    docs.push({ path: page('privacy')[lang].path, body: privacyDoc(lang) })
 
     for (const s of sortedServices()) {
       docs.push({
